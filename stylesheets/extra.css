@@ -1,0 +1,19 @@
+/* custom-styles.css */
+.md-typeset pre > code {
+    max-height: 15rem;
+}
+
+.tip, .warn {
+    border: 1px solid rgb(255, 196, 0);
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 0px 3px rgb(255, 196, 0);
+}
+
+
+.dang {
+    border: 1px solid rgb(255, 0, 0);
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0px 0px 3px rgb(255, 0, 0);
+}

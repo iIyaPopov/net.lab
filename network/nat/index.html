@@ -1,0 +1,1938 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../acl/">
+      
+      
+        <link rel="next" href="../dhcp/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.44">
+    
+    
+      
+        <title>NAT - net.lab</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Nunito";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#nat" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="net.lab" class="md-header__button md-logo" aria-label="net.lab" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            net.lab
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              NAT
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="net.lab" class="md-nav__button md-logo" aria-label="net.lab" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    net.lab
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stand/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🛠️ Стенд
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    🌐 Сети
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            🌐 Сети
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vpcs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Первая схема в GNS3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../switch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Коммутатор
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Маршрутизатор
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subnets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Деление на подсети
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../static-routing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Статическая маршрутизация
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ipv6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPv6
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../icmp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ICMP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vlan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VLAN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fhrp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FHRP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tcp-udp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TCP/UDP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../acl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ACL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    NAT
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    NAT
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Теоретические сведения
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Теоретические сведения">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nat_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Зачем нужен NAT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Приватные адреса
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Кто может использовать адреса?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Конфиденциальность и безопасность сети
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nat_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Типы NAT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проброс портов
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ddns" class="md-nav__link">
+    <span class="md-ellipsis">
+      DDNS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Пример
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Пример">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nat_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Динамический NAT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проброс портов
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧰 Лабораторная работа
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧰 Лабораторная работа">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      Схема
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      Условия
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Дополнительные задания
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      🤔 Контрольные вопросы
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dhcp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DHCP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mstp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MSTP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RIP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ospf/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OSPF
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wlan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WLAN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    🚢 Контейнеризация и оркестрация
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            🚢 Контейнеризация и оркестрация
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../containers/docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../containers/docker%2Bgns3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker + GNS3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    🔒 Безопасность
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            🔒 Безопасность
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/ipds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPDS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    🗃️ Прочее
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            🗃️ Прочее
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../other/iperf3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    iperf3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../other/mkdocs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MkDocs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../other/jupyter-notebook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jupyter Notenetwork
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    О сайте
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Теоретические сведения
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Теоретические сведения">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nat_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Зачем нужен NAT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Приватные адреса
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Кто может использовать адреса?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Конфиденциальность и безопасность сети
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nat_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Типы NAT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проброс портов
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ddns" class="md-nav__link">
+    <span class="md-ellipsis">
+      DDNS
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Пример
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Пример">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#nat_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Динамический NAT
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проброс портов
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧰 Лабораторная работа
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧰 Лабораторная работа">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      Схема
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      Условия
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Дополнительные задания
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      🤔 Контрольные вопросы
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<style>
+    .author {
+        color: gray;
+        font-size: 0.6rem;
+        text-align: right;
+    }
+</style>
+
+<div class="author">
+Автор: И. Попов
+</div>
+
+<h1 id="nat">NAT</h1>
+<h2 id="_1">Теоретические сведения</h2>
+<p>Синонимы:</p>
+<ul>
+<li>Network Address Translation</li>
+<li>Трансляция сетевых адресов</li>
+<li>Преобразование сетевых адресов</li>
+</ul>
+<h3 id="nat_1">Зачем нужен NAT</h3>
+<ul>
+<li>Экономия IPv4-адресов, т.к. публичных IPv4-адресов недостаточно для обеспечения уникальности всех устройств</li>
+</ul>
+<p><img alt="img" src="assets/10.jpg" /></p>
+<ul>
+<li>Частные (приватные) адреса всетречаются повсюду</li>
+</ul>
+<p><img alt="img" src="assets/20.jpg" /></p>
+<ul>
+<li>Частные адреса преобразуются в другие частные или публичные адреса</li>
+</ul>
+<p><img alt="img" src="assets/30.jpg" /></p>
+<h3 id="_2">Приватные адреса</h3>
+<ul>
+<li><code>10.0.0.0/8</code></li>
+<li><code>172.16.0.0/12</code></li>
+<li><code>192.168.0.0/16</code></li>
+</ul>
+<h3 id="_3">Кто может использовать адреса?</h3>
+<ul>
+<li><strong>Приватные</strong> (или серые) - все, кто хочет и как хочет</li>
+<li><strong>Публичные</strong> (или белые) - <strong>НЕ</strong> могут использоваться всеми</li>
+</ul>
+<p>С помощью <strong>приватного</strong> адреса <strong>нельзя</strong> добраться в Интернете до ресурсов, поэтому частные адреса преобразуются в публичные.</p>
+<h3 id="_4">Конфиденциальность и безопасность сети</h3>
+<ul>
+<li>Со стороны Интернета не видна структура внутренней сети</li>
+<li>Со стороны Интернета невозможно попасть во внутреннюю сеть просто так<ul>
+<li>Проброс портов</li>
+<li>Сначала запрос из внутренней сети, только потом может быть пропущен ответ из Интернета во внутреннюю сеть</li>
+</ul>
+</li>
+</ul>
+<p><img alt="img" src="assets/40.jpg" /></p>
+<ul>
+<li>
+<p>Если клиентов во внутренней сети несколько, и все они обращаются на один сервер, то для сервера у клиентов один и тот же IP-адрес</p>
+<ul>
+<li>Сервер отличает их по портам транспортного уровня</li>
+<li>Устройства NAT отличают ответы от сервера тоже по портам, для этого у них есть специальная таблица</li>
+</ul>
+</li>
+<li>
+<p>Несколько клиентов во внутренней сети обращаются к одному серверу во внешней сети</p>
+</li>
+</ul>
+<p><img alt="img" src="assets/50.jpg" /></p>
+<h3 id="nat_2">Типы NAT</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Статический</label><label for="__tabbed_1_2">Динамический</label><label for="__tabbed_1_3">PAT (NAT с перегрузкой)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li>Взаимно-однозначное соответствие между локальным и глобальным адресами</li>
+<li>Назначается администратором</li>
+<li>Может потребоваться большое количество</li>
+<li>Целесообразно использовать только для серверов</li>
+<li>Если устройство, за которым закреплен адрес, не выходит в Интернет, то и адрес "простаивает"</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>Сопоставление адресов по схеме "многие ко многим" между локальными и глобальными адресами</li>
+<li>Отличается от статического тем, что за устройством не закреплен публичный адрес, поэтому "простои" глобального адреса менее заметны</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>Сопоставление адресов по схеме "многие к одному" между локальными и глобальным адресами</li>
+<li>По умолчанию используется большинством домашних маршрутизаторов</li>
+<li>Клиенты "отличаются" портами</li>
+<li>Если нельзя сохранить оригинальный порт, то выбирается следующий доступный</li>
+<li>Если нет доступных портов, то выбирается следующий адрес с оригинальным портом</li>
+</ul>
+</div>
+</div>
+</div>
+<h3 id="_5">Проброс портов</h3>
+<p>Позволяет получить доступ к ресурсам, которые находятся во внутренней сети, со стороны Интернета.</p>
+<ul>
+<li>На устройстве NAT, к которому подключен сервер, необходимо настроить проброс портов</li>
+<li>Проброс портов может быть множественным</li>
+</ul>
+<p><img alt="Обращение к серверу, который находится за NAT" src="assets/60.jpg" /></p>
+<h3 id="ddns">DDNS</h3>
+<ul>
+<li>Провайдер выдает публичный адрес, но он может меняться, т.е. адрес не статический</li>
+<li>Служба DNS, которая автоматически меняет DNS-записи, когда адрес изменяется<ul>
+<li>Маршрутизатор следит за изменением адреса</li>
+<li>На этом же маршрутизаторе настраивается DDNS, если поддерживается</li>
+</ul>
+</li>
+</ul>
+<h2 id="_6">Пример</h2>
+<ul>
+<li>В каждой локальной сети есть несколько ПК</li>
+<li>Везде в примере адреса статические, но они могут быть и динамиечкими при определенных условиях</li>
+<li>В LAN дома 1 есть сервер, который пользователь хочет сделать доступным из сети Интернет</li>
+<li>Любое устройство должно уметь общаться с сервером в Интернете</li>
+<li>VLAN для деления частных и публичных адресов в сети провайдера 1</li>
+</ul>
+<p><strong>L1 схема</strong></p>
+<p><img alt="img" src="assets/80.jpg" /></p>
+<p><strong>L3 схема</strong></p>
+<p><img alt="img" src="assets/70.jpg" /></p>
+<p><strong>Настройка домашней сети 1</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:3"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">R1</label><label for="__tabbed_2_2">PC1</label><label for="__tabbed_2_3">SRV1</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/0
+ip add 192.168.0.1 255.255.255.0
+no sh
+end
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ip 192.168.0.2/24 192.168.0.1
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ip 192.168.0.3/24 192.168.0.1
+</code></pre></div>
+</div>
+</div>
+</div>
+<p><strong>Настройка домашней сети 2</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">R2</label><label for="__tabbed_3_2">PC2</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/0
+ip add 192.168.0.1 255.255.255.0
+no sh
+end
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ip 192.168.0.2/24 192.168.0.1
+</code></pre></div>
+</div>
+</div>
+</div>
+<p><strong>Настройка домашней сети 3</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">R3</label><label for="__tabbed_4_2">PC3</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/0
+ip add 192.168.0.1 255.255.255.0
+no sh
+end
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ip 192.168.0.2/24 192.168.0.1
+</code></pre></div>
+</div>
+</div>
+</div>
+<p><strong>Настройка сети провайдера 1</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:3"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">R1</label><label for="__tabbed_5_2">R2</label><label for="__tabbed_5_3">R4</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/1
+ip add 10.0.0.2 255.255.255.0
+no sh
+end
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/1
+ip add 10.0.0.3 255.255.255.0
+no sh
+end
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/0
+ip add 10.0.0.1 255.255.255.0
+no sh
+end
+</code></pre></div>
+</div>
+</div>
+</div>
+<p><strong>Настройка сети провайдера 2</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">R3</label><label for="__tabbed_6_2">R5</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/1
+ip add 10.0.0.2 255.255.255.0
+no sh
+end
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/1
+ip add 10.0.0.1 255.255.255.0
+no sh
+end
+</code></pre></div>
+</div>
+</div>
+</div>
+<p><strong>Настройка сети "Интернет"</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:3"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">R4</label><label for="__tabbed_7_2">R5</label><label for="__tabbed_7_3">SRV2</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/1
+ip add 1.0.0.1 255.255.255.0
+no sh
+end
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/0
+ip add 1.0.0.2 255.255.255.0
+no sh
+end
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ip 1.0.0.3/24
+</code></pre></div>
+</div>
+</div>
+</div>
+<p><strong>⚠️ На данный момент устройства, находящиейся в разных сетях, не будут доступны друг другу.</strong></p>
+<p>Если на PC1 выполнить <code>ping 10.0.0.1</code>, то будет <code>timeout</code> потому, что R4 не знает, куда отправить ответ.</p>
+<p>Если же на PC1 выполнить <code>ping 10.0.0.2</code>, то доступ есть, т.к. пингуется R1, а он одним интерфейсом находится в той же сети, что и PC1.</p>
+<p><strong>Настройка NAT в домашних сетях</strong></p>
+<p>Необходимо указать, какой интерфейс на маршрутизаторе будет внутренним, а какой - внешним.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">R1</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/1
+ip nat outside
+exit
+int e0/0
+ip nat inside
+end
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Далее настройка самого NAT. В данном случае будет PAT.
+С помощью ACL указывается, какие адреса необходимо преобразовывать.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">R1</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+access-list 1 permit 192.168.0.0 /24
+ip nat inside source list 1 interface e0/1 overload
+end
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Теперь PC1 должен "пинговать" R4.</p>
+<p>Аналогичные настройки выполняются на R2 и R3.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:1"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">R2</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/1
+ip nat outside
+exit
+int e0/0
+ip nat inside
+exit
+access-list 1 permit 192.168.0.0 /24
+ip nat inside source list 1 interface e0/1 overload
+end
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Теперь PC2 должен "пинговать" R4.</p>
+<div class="admonition question">
+<p class="admonition-title">Будет ли PC2 пинговать R1?</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">R3</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/1
+ip nat outside
+exit
+int e0/0
+ip nat inside
+exit
+access-list 1 permit 192.168.0.0 /24
+ip nat inside source list 1 interface e0/1 overload
+end
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>PC3 теперь "пингует" R5.</p>
+<p><strong>Настройка NAT в сетях провайдера</strong></p>
+<p>Настройки аналогичные.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="12:2"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><input id="__tabbed_12_2" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">R4</label><label for="__tabbed_12_2">R5</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/1
+ip nat outside
+exit
+int e0/0
+ip nat inside
+exit
+access-list 1 permit 10.0.0.0 /24
+ip nat inside source list 1 interface e0/1 overload
+end
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/0
+ip nat outside
+exit
+int e0/1
+ip nat inside
+exit
+access-list 1 permit 10.0.0.0 /24
+ip nat inside source list 1 interface e0/0 overload
+end
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Если попробовать "пропинговать" сервер в Интернете с любого ПК, то ничего не выйдет. Происходит так потому, что на R1-3 нет маршрутов в ту сеть. Можно создать такой маршрут, или маршрут по умолчанию.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="13:1"><input checked="checked" id="__tabbed_13_1" name="__tabbed_13" type="radio" /><div class="tabbed-labels"><label for="__tabbed_13_1">R1, R2, R3</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+ip route 0.0.0.0 0.0.0.0 10.0.0.1
+end
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>✔️ Теперь все смогут "пинговать" сервер в Интернете.</p>
+<p>На данный момент доступ к SRV1 есть только у устройств из домашней сети 1.</p>
+<div class="admonition question">
+<p class="admonition-title">Кого сможет пинговать SRV2 на данный момент?</p>
+</div>
+<p><strong>Настройка доступа к SRV1 из "Интернета"</strong></p>
+<p>Пусть у SRV1 будет публичный адрес <code>1.0.0.10</code>. Далее продемонстрирована настройка статического NAT.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="14:1"><input checked="checked" id="__tabbed_14_1" name="__tabbed_14" type="radio" /><div class="tabbed-labels"><label for="__tabbed_14_1">R4</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+ip nat inside source static 10.0.0.10 1.0.0.10
+end
+
+sh ip nat transl
+Pro Inside global      Inside local       Outside local      Outside global
+--- 1.0.0.10           10.0.0.10          ---                ---
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Из-за двойного NAT необходимо выполнить еще настройки на R1.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="15:1"><input checked="checked" id="__tabbed_15_1" name="__tabbed_15" type="radio" /><div class="tabbed-labels"><label for="__tabbed_15_1">R1</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+ip nat inside source static 192.168.0.3 10.0.0.10
+end
+
+sh ip nat transl
+Pro Inside global      Inside local       Outside local      Outside global
+--- 10.0.0.10          192.168.0.3        ---                ---
+R1#
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>✔️ Теперь можно "пинговать" SRV1 с других устройств. "Пинговать" нужно публичный адрес SRV1 - <code>1.0.0.10</code>.</p>
+<div class="admonition question">
+<p class="admonition-title">PC2 может пинговать SRV1 по адресу <code>10.0.0.10</code>. PC3 так сделать не сможет. Почему?</p>
+</div>
+<p>Настройка статического NAT при такой схеме не очень удобна и на самом деле не очень реализуема, т.к. нужно "заставить" провайдера настроить статический NAT.</p>
+<p><strong>Использование VLAN для выдачи публичных адресов</strong></p>
+<ul>
+<li>В сети провайдера 1 выдана публичная сеть - <code>2.0.0.0/24</code></li>
+<li>R1 провайдер выдал публичный адрес - <code>2.0.0.10</code></li>
+<li>R2 не должен получать публичный адрес</li>
+<li>R5 и SRV2 нужно рассказать, где находится эта публичная сеть</li>
+<li>На R1 нужно будет все равно настроить статический NAT, но провайдеру уже не нужно будет выполнять дополнительных настроек</li>
+<li>VLAN 2 - для публичной сети</li>
+<li>VLAN 10 - для приватной сети</li>
+</ul>
+<p>Сначала будет удален адрес на R4 для создания подынтерфейсов.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="16:1"><input checked="checked" id="__tabbed_16_1" name="__tabbed_16" type="radio" /><div class="tabbed-labels"><label for="__tabbed_16_1">R4</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/0
+no ip add 10.0.0.1 255.255.255.0
+end
+
+conf t
+int e0/0.2
+enc dot1q 2
+ip add 2.0.0.1 255.255.255.0
+exit
+int e0/0.10
+enc dot1q 10
+ip add 10.0.0.1 255.255.255.0
+end
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Далее нужно настроить транк и порты доступа на S1.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="17:1"><input checked="checked" id="__tabbed_17_1" name="__tabbed_17" type="radio" /><div class="tabbed-labels"><label for="__tabbed_17_1">S1</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/0
+sw trunk enc dot1q
+sw mode trunk
+exit
+int e0/1
+sw mode access
+sw access vlan 2
+exit
+int e0/2
+sw mode access
+sw access vlan 10
+end
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>На R2 не нужны никакие изменения, а на R1 нужно назначить публичный адрес на порт <code>e0/1</code>. По идее он должен выдаваться динамически с привязкой к MAC-адресу, но в примере, как уже было отмечено, все адреса статические.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="18:1"><input checked="checked" id="__tabbed_18_1" name="__tabbed_18" type="radio" /><div class="tabbed-labels"><label for="__tabbed_18_1">R1</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/1
+no ip add 10.0.0.2 255.255.255.0
+ip add 2.0.0.10 255.255.255.0
+end
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>На R1 нужно добавить новое правило трансляции и удалить старое.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="19:1"><input checked="checked" id="__tabbed_19_1" name="__tabbed_19" type="radio" /><div class="tabbed-labels"><label for="__tabbed_19_1">R1</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+no ip nat inside source static 192.168.0.3 10.0.0.10
+ip nat inside source static 192.168.0.3 2.0.0.10
+end
+sh ip nat translations
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Осталось настроить маршруты в сеть <code>2.0.0.0/24</code> на R5 и SRV2. На SRV2 можно задать только шлюз по умолчанию.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="20:3"><input checked="checked" id="__tabbed_20_1" name="__tabbed_20" type="radio" /><input id="__tabbed_20_2" name="__tabbed_20" type="radio" /><input id="__tabbed_20_3" name="__tabbed_20" type="radio" /><div class="tabbed-labels"><label for="__tabbed_20_1">R5</label><label for="__tabbed_20_2">R1</label><label for="__tabbed_20_3">SRV2</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+ip route 2.0.0.0 255.255.255.0 1.0.0.1
+end
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+ip route 0.0.0.0 0.0.0.0 2.0.0.1
+end
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ip 1.0.0.3/24 1.0.0.1
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>✔️ Теперь SRV1 будет доступен всем по адресу <code>2.0.0.10</code>.</p>
+<div class="admonition question">
+<p class="admonition-title">По какому пути идет трафик от PC2 до SRV1?</p>
+</div>
+<h3 id="nat_3">Динамический NAT</h3>
+<p><code>ip nat pool NAME IP1 IP2 NETMASK</code> - создать диапазон адресов</p>
+<p><code>access-list 1 permit IP WILDCARD</code> - создать ACL</p>
+<p><code>ip nat inside source list 1 pool NAME</code> - настройка динамического NAT</p>
+<h3 id="_7">Проброс портов</h3>
+<p>Нужен когда есть публичный адрес, внутри сети несколько сервисов и между ними нужно разделить адрес. Но т.к. адрес один, тогда делить нужно порты.</p>
+<p><code>ip nat inside source static tcp/udp LOCAL-IP PORT GLOBAL-IP PORT</code> - создать правило</p>
+<p><code>clear ip nat translations *</code> - очистить таблицу трансляции</p>
+<h2 id="_8">🧰 Лабораторная работа</h2>
+<details class="info">
+<summary>Ознакомиться перед выполнением</summary>
+<ul>
+<li>Вместо ❔ или <code>x</code> нужно подставить свой номер по журналу</li>
+<li>Выполнять задание без "отмашки" <strong>не стоит</strong> ⛔, т.к. задание здесь может отличаться от актуальной версии</li>
+<li>У каждой работы есть <strong>срок сдачи</strong> 📅, который озвучивается на занятии, после которого работа не может быть защищена на максимальный балл 📉</li>
+<li><strong>Дополнительные задания</strong> 📚  не являются обязательными, но по результатам сдачи лабораторной работы может быть выдано одно или несколько из них. Также дополнительное задание может быть сформулировано <strong>устно</strong></li>
+<li>Для каждой лабораторной работы должен быть <strong>отчет</strong> 📝 с описанием выполнения ваших действий, оформление должно соответствовать требованиям (см. на сайте учебного заведения)</li>
+<li>Нужно уметь ответить на <strong>вопросы</strong> ❓ по теме, контрольные вопросы и другие связанные вопросы</li>
+<li>Примеры могут быть выполнены <strong>по желанию</strong>, а также выданы в качестве дополнительного задания с изменениями или без <strong>в случае неуспешной 😢 защиты основной работы</strong></li>
+<li>Иногда в работах встречаются задания по <strong>IPv4 и IPv6</strong> одновременно 🔗. Это считается как <strong>одна работа</strong>. Допускается сдача работы только с IPv4 или только с IPv6, но <strong>максимальный балл</strong> в таком случае <strong>получить невозможно</strong></li>
+</ul>
+</details>
+<p><strong>🎯 Цель работы:</strong> получить навыки настройки NAT.</p>
+<h3 id="_9">Схема</h3>
+<p><img alt="Схема сети" src="assets/lab.jpg" /></p>
+<h3 id="_10">Условия</h3>
+<ol>
+<li>В домашних сетях использовать сети <code>192.168.x.0/24</code></li>
+<li>В сетях провайдера использовать сети <code>10.0.x.0/24</code></li>
+<li>В "Интернете" использовать произвольные подсети из сети <code>1.0.x.0/24</code></li>
+<li>Сеть публичных адресов провайдера 1 - <code>2.0.x.0/24</code></li>
+<li>Для доступа в "Интернет" использовать PAT там, где не противоречат другие пункты условий</li>
+<li>В схеме должен быть настроен двойной NAT</li>
+<li>Доступ к серверу 1 и 2 из WAN должен осуществляться с помощью проброса порта <code>2000 + x</code> (например, 2001); проверить можно с помощью ping ? (указав порт udp/tcp)</li>
+<li>Доступ к ПК дома 3 из WAN должен осуществляться с помощью статического NAT</li>
+<li>Везде статическая маршрутизация</li>
+<li>Маршрутизаторы провайдера являются устройствами NAT</li>
+<li>Из WAN нельзя добраться к LAN сетям по приватным адресам</li>
+<li>В LAN сети провайдера 1 использовать VLAN для деления на приватную и частную
+подсети</li>
+</ol>
+<h3 id="_11">📚 Дополнительные задания</h3>
+<ol>
+<li>Изменить соединения/расположение устройств.</li>
+<li>Изменить адресацию и подсети.</li>
+<li>Изменить тип NAT.</li>
+<li>Добавить динамическую выдачу сетевой конфигурации на домашние маршрутизаторы со стороны провайдера.</li>
+</ol>
+<h3 id="_12">🤔 Контрольные вопросы</h3>
+<ol>
+<li>Указывает ли что-то в Wireshark на то, что происходит трансляция адресов (если при этом не знать структуру сети)?</li>
+<li>Чем отличается динамический NAT от PAT?</li>
+<li>Используется ли у вас дома NAT? Если да, то какой тип?</li>
+<li>Можно ли на вашем домашнем маршрутизаторе настроить port forwarding?</li>
+<li>Где используется двойной NAT и зачем?</li>
+<li>Что нужно сделать, чтобы организовать доступ из "Интернета" для ПК в домашней сети 2?</li>
+</ol>
+<style>
+    .copyright {
+        color: gray;
+        font-size: 0.6rem;
+    }
+</style>
+
+<div class="copyright">
+
+<hr>
+
+Используя данный сайт и его ресурсы, вы соглашаетесь с <a href=/policy/> политикой и соглашениями сайта</a>.<br>
+
+©️ Оформление, изложение, медиаматериалы. И. Попов, 2020-2025<br>
+
+Сделано с помощью Material for MkDocs.<br>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2454 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../vlan/">
+      
+      
+        <link rel="next" href="../tcp-udp/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.44">
+    
+    
+      
+        <title>FHRP - net.lab</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Nunito";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fhrp" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="net.lab" class="md-header__button md-logo" aria-label="net.lab" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            net.lab
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              FHRP
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="net.lab" class="md-nav__button md-logo" aria-label="net.lab" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    net.lab
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stand/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🛠️ Стенд
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    🌐 Сети
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            🌐 Сети
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vpcs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Первая схема в GNS3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../switch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Коммутатор
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Маршрутизатор
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subnets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Деление на подсети
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../static-routing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Статическая маршрутизация
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ipv6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPv6
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../icmp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ICMP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vlan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VLAN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    FHRP
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    FHRP
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Теоретические сведения
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Теоретические сведения">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Зачем нужна данная группа протоколов
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fhrp_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Протоколы группы FHRP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vrrp" class="md-nav__link">
+    <span class="md-ellipsis">
+      VRRP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VRRP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Группы
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Роли устройств
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      Приоритет маршрутизатора (priority)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preempt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Режим preempt
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Таймеры
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Таймеры">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hellotime" class="md-nav__link">
+    <span class="md-ellipsis">
+      HelloTime
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#holdtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      HoldTime
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Аутентификация
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Отсутствие встроенной балансировки нагрузки
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      Примеры
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Примеры">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-cisco" class="md-nav__link">
+    <span class="md-ellipsis">
+      Пример 1 (Cisco)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Пример 1 (Cisco)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      Схема и деление на подсети
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Настройка первой LAN
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lan_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Настройка второй LAN
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проверка
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      Настройка центральной сети
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vrrpv3-ipv6" class="md-nav__link">
+    <span class="md-ellipsis">
+      VRRPv3 (IPv6)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-huawei" class="md-nav__link">
+    <span class="md-ellipsis">
+      Пример 2 (Huawei)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-mikrotik" class="md-nav__link">
+    <span class="md-ellipsis">
+      Пример 3 (MikroTik)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Пример 3 (MikroTik)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      Преднастройки
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      Настройка сети
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-mikrotik-ipv6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Пример 4 (MikroTik + IPv6)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Пример 5 (Linux)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧰 Лабораторная работа
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧰 Лабораторная работа">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      Схема
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      Условия
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Дополнительные задания
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      🤔 Контрольные вопросы
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tcp-udp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TCP/UDP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../acl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ACL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nat/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NAT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dhcp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DHCP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mstp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MSTP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RIP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ospf/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OSPF
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wlan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WLAN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    🚢 Контейнеризация и оркестрация
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            🚢 Контейнеризация и оркестрация
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../containers/docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../containers/docker%2Bgns3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker + GNS3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    🔒 Безопасность
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            🔒 Безопасность
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/ipds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPDS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    🗃️ Прочее
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            🗃️ Прочее
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../other/iperf3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    iperf3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../other/mkdocs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MkDocs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../other/jupyter-notebook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jupyter Notenetwork
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    О сайте
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Теоретические сведения
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Теоретические сведения">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Зачем нужна данная группа протоколов
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fhrp_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Протоколы группы FHRP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vrrp" class="md-nav__link">
+    <span class="md-ellipsis">
+      VRRP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="VRRP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Группы
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Роли устройств
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#priority" class="md-nav__link">
+    <span class="md-ellipsis">
+      Приоритет маршрутизатора (priority)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preempt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Режим preempt
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Таймеры
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Таймеры">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hellotime" class="md-nav__link">
+    <span class="md-ellipsis">
+      HelloTime
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#holdtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      HoldTime
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Аутентификация
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Отсутствие встроенной балансировки нагрузки
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      Примеры
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Примеры">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-cisco" class="md-nav__link">
+    <span class="md-ellipsis">
+      Пример 1 (Cisco)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Пример 1 (Cisco)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      Схема и деление на подсети
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lan" class="md-nav__link">
+    <span class="md-ellipsis">
+      Настройка первой LAN
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lan_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Настройка второй LAN
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      Проверка
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      Настройка центральной сети
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vrrpv3-ipv6" class="md-nav__link">
+    <span class="md-ellipsis">
+      VRRPv3 (IPv6)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-huawei" class="md-nav__link">
+    <span class="md-ellipsis">
+      Пример 2 (Huawei)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-mikrotik" class="md-nav__link">
+    <span class="md-ellipsis">
+      Пример 3 (MikroTik)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Пример 3 (MikroTik)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      Преднастройки
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      Настройка сети
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-mikrotik-ipv6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Пример 4 (MikroTik + IPv6)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Пример 5 (Linux)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧰 Лабораторная работа
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧰 Лабораторная работа">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      Схема
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      Условия
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Дополнительные задания
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      🤔 Контрольные вопросы
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<style>
+    .author {
+        color: gray;
+        font-size: 0.6rem;
+        text-align: right;
+    }
+</style>
+
+<div class="author">
+Автор: И. Попов
+</div>
+
+<h1 id="fhrp">Группа протоколов FHRP</h1>
+<h2 id="_1">Теоретические сведения</h2>
+<h3 id="_2">Зачем нужна данная группа протоколов</h3>
+<p>First Hop Redundancy Protocols (протокол резервирования первого "хопа")</p>
+<p>В домашней сети обычно один шлюз и там данная группа не нужна.</p>
+<p>В сети, где несколько выходов из нее (резервные), необходимо в маршрутах указывать шлюз. Часто это адрес интерфейса маршрутизатора. Но что, если с этим интерфейсом или машрутизатором произойдет? В случае динамической маршрутизации, возможно, ничего страшного. Но если маршрутизация статическая или в сети есть обычные ПК, на которых, как правило, только один шлюз по умолчанию, часть сети может оказаться недоступной.</p>
+<p>Для решения проблемы выбирают группу маршрутизаторов, сообщают им общий виртуальный адрес, за который они отвечают. Этот виртуальный адрес и будет шлюзом для всех остальных. Теперь, если что-то произойдет с одним из маршрутизаторов, вместо него за шлюз будет отвечать другой маршрутизатор.</p>
+<h3 id="fhrp_1">Протоколы группы FHRP</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">HSRP</label><label for="__tabbed_1_2">VRRP</label><label for="__tabbed_1_3">GLBP</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li>Hot Standby Router Protocol</li>
+<li>Протокол Cisco</li>
+<li>Максимум 2 маршрутизатора</li>
+<li>Может быть больше, но реально они будут задействованы, когда что-то произойдет с одним из двух</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>Virtual Router Redundancy Protocol</li>
+<li>Свободный протокол</li>
+<li>Похож на HSRP</li>
+<li>Максимум 2 маршрутизатора</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>Gateway Load Balancing Protocol</li>
+<li>Протокол Cisco</li>
+<li>Максимум 4 маршрутизатора</li>
+</ul>
+</div>
+</div>
+</div>
+<h3 id="vrrp">VRRP</h3>
+<h4 id="_3">Группы</h4>
+<p>Объединение маршрутизаторов в одну группу образует <strong>виртуальный маршрутизатор</strong>. Ему назначается IP-адрес, который будет использоваться как шлюз по умолчанию для узлов в сети.</p>
+<p>Виртуальный MAC-адрес <code>0000:5E00:01xx</code>, где <code>xx</code> - номер группы VRRP.</p>
+<h4 id="_4">Роли устройств</h4>
+<p>VRRP <strong>Master</strong> - маршрутизатор, который отвечает за пересылку пакетов, которые отправлены на шлюз.</p>
+<p>VRRP <strong>Backup</strong> - маршрутизатор, который находится в режиме ожидания и готов взять на себя роль VRRP Master router, как только тот станет недоступным.</p>
+<h4 id="priority">Приоритет маршрутизатора (priority)</h4>
+<ul>
+<li>В одной группе главный маршрутизатор выбирается на основе приоритета</li>
+<li>Может иметь значение от 1 до 255</li>
+<li>Чем выше значение, тем выше приоритет маршрутизатора</li>
+</ul>
+<p>Если виртуальный адрес равен адресу одного из маршрутизаторов на его интерфейсе, то этому марщрутизатору назначается наивысший приоритет - 255.</p>
+<h4 id="preempt">Режим <code>preempt</code></h4>
+<p>Когда главный маршрутизатор запускается позже, или "пропадает" на время, то его место занимает другой маршрутизатор из этой же группы.</p>
+<p>Чтобы после "появления" главного маршрутизатора он снова мог им стать, нужно включать этот режим.</p>
+<h4 id="_5">Таймеры</h4>
+<p>В рамках одной группы маршрутизаторы периодически отправляют друг другу <code>hello</code>- сообщения, чтобы убедиться, что соседнее устройство в норме.</p>
+<h5 id="hellotime"><code>HelloTime</code></h5>
+<p>Интервал времени, в течении которого маршрутизатор ожидает от активного маршрутизатора <code>hello</code>-пакеты.</p>
+<ul>
+<li>Интервал от 1 до 255</li>
+<li>По умолчанию 3 секунды</li>
+</ul>
+<h5 id="holdtime"><code>HoldTime</code></h5>
+<p>Интервал времени по истечении которого активный или резервный маршрутизатор объявляется недоступным.</p>
+<ul>
+<li>Интервал от 1 до 255</li>
+<li>По умолчанию 10 секунд</li>
+</ul>
+<p>Обычно значение <code>HoldTime</code> берется равным <code>3 x HelloTime</code>.</p>
+<h4 id="_6">Аутентификация</h4>
+<p>Установка доверительных отношений между маршрутизаторами из одной группы позволяет изолироваться от злоумышленника, который может установить наивысший приоритет на своем устройстве и включить <code>preempt</code>. Это позволит ему "руководить" группой и весь трафик будет проходить через его устройство.</p>
+<ul>
+<li>Пароль должен быть одинаковым для всех маршрутизаторов, принадлежащих одной группе</li>
+<li>Пароль передается в открытом (не зашифрованном) виде</li>
+<li>Возможно использование хеша - MD5 (более безопасно)</li>
+</ul>
+<h4 id="_7">Отсутствие встроенной балансировки нагрузки</h4>
+<p>Весь трафик идет через главный маршрутизатор.</p>
+<p>✔️ Есть решение:</p>
+<ul>
+<li>На маршрутизаторах настраивается несколько VRRP-групп,</li>
+<li>В каждой группе сделать так, чтобы разные маршрутизаторы стали Master,</li>
+<li>Для одной части хостов сделать шлюзом один маршрутизатор, для другой части - другой маршрутизатор</li>
+</ul>
+<h2 id="_8">Примеры</h2>
+<h3 id="1-cisco">Пример 1 (Cisco)</h3>
+<h4 id="_9">Схема и деление на подсети</h4>
+<p><img alt="Схема" src="assets/10.jpg" /></p>
+<p>Адреса виртуальных маршрутизаторов - последний адрес в сети.</p>
+<h4 id="lan">Настройка первой LAN</h4>
+<ul>
+<li>Priority R1 - 200</li>
+<li>Priority R2 - 100</li>
+<li>На R1 режим <code>preempt</code></li>
+</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">R1</label><label for="__tabbed_2_2">R2</label><label for="__tabbed_2_3">PC1</label><label for="__tabbed_2_4">PC2</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/0
+ip add 10.12.0.1 255.255.255.0
+vrrp 1 priority 200
+vrrp 1 ip 10.12.0.254
+vrrp 1 preempt
+no sh
+end
+wr mem
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/0
+ip add 10.12.0.2 255.255.255.0
+vrrp 1 priority 100
+vrrp 1 ip 10.12.0.254
+no sh
+end
+wr mem
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ip 10.12.0.10/24 10.12.0.254
+save
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ip 10.12.0.20/24 10.12.0.254
+save
+</code></pre></div>
+</div>
+</div>
+</div>
+<p class="annotate">Схема: (1)</p>
+<ol>
+<li><img alt="Схема" src="assets/10.jpg" /></li>
+</ol>
+<h4 id="lan_1">Настройка второй LAN</h4>
+<ul>
+<li>Priority R3 - 200</li>
+<li>Priority R4 - 100</li>
+<li>На R3 режим <code>preempt</code></li>
+</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:4"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">R3</label><label for="__tabbed_3_2">R4</label><label for="__tabbed_3_3">PC3</label><label for="__tabbed_3_4">PC4</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/0
+ip add 10.34.0.1 255.255.255.0
+vrrp 1 priority 200
+vrrp 1 ip 10.34.0.254
+vrrp 1 preempt
+no sh
+end
+wr mem
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/0
+ip add 10.34.0.2 255.255.255.0
+vrrp 1 priority 100
+vrrp 1 ip 10.34.0.254
+no sh
+end
+wr mem
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ip 10.34.0.30/24 10.34.0.254
+save
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ip 10.34.0.40/24 10.34.0.254
+save
+</code></pre></div>
+</div>
+</div>
+</div>
+<p class="annotate">Схема: (1)</p>
+<ol>
+<li><img alt="Схема" src="assets/10.jpg" /></li>
+</ol>
+<h4 id="_10">Проверка</h4>
+<p><code>sh vrrp ?</code> - посмотреть состояние протокола.</p>
+<h4 id="_11">Настройка центральной сети</h4>
+<p>Чтобы была доступность между ПК из разных подсетей, необходимо настроить маршрутизацию. Маршрутизация может быть статической или динамической, но на данный момент будет настроена статическая.</p>
+<p>Между LAN1 и LAN2 есть несколько путей, и все их можно создать. Но если что-то произойдет с маршрутом, то устройство не всегда может знать, что с ним что-то не так.</p>
+<p>Так, например, на R1 и R2 можно создать следующие маршруты</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">R1, R2</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+ip route 10.34.0.0 255.255.255.0 10.14.0.3
+ip route 10.34.0.0 255.255.255.0 10.14.0.4
+end
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Аналогично нужно сделать на остальных маршрутизаторах.</p>
+<p><code>show ip route</code> - отобразить таблицу маршрутизации.</p>
+<p>Допустим, на R3 интерфейс в сторону S2 или S3 станет нерабочим. Тогда R1 и R2, не зная, этого могут продолжать слать туда пакеты.</p>
+<p class="annotate">Схема: (1)</p>
+<ol>
+<li><img alt="Схема" src="assets/10.jpg" /></li>
+</ol>
+<p>Есть несколько вариантов:</p>
+<ul>
+<li>Динамическая маршрутизация,</li>
+<li>SLA,</li>
+<li>VRRP.</li>
+</ul>
+<p>Далее приводится конфигурация варианта с VRRP.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:4"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><input id="__tabbed_5_4" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">R1</label><label for="__tabbed_5_2">R2</label><label for="__tabbed_5_3">R3</label><label for="__tabbed_5_4">R4</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/1
+ip add 10.14.0.1 255.255.255.0
+vrrp 12 priority 200
+vrrp 12 ip 10.14.0.12
+no sh
+end
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/1
+ip add 10.14.0.2 255.255.255.0
+vrrp 12 priority 100
+vrrp 12 ip 10.14.0.12
+no sh
+end
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/1
+ip add 10.14.0.3 255.255.255.0
+vrrp 34 priority 200
+vrrp 34 ip 10.14.0.34
+no sh
+end
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+int e0/1
+ip add 10.14.0.4 255.255.255.0
+vrrp 34 priority 100
+vrrp 34 ip 10.14.0.34
+no sh
+end
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>После этого можно настроить маршруты со шлюзом на виртуальный адрес.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">R1, R2</label><label for="__tabbed_6_2">R3, R4</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+ip route 10.34.0.0 255.255.255.0 10.12.0.34
+end
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+ip route 10.12.0.0 255.255.255.0 10.12.0.12
+end
+</code></pre></div>
+</div>
+</div>
+</div>
+<h4 id="vrrpv3-ipv6">VRRPv3 (IPv6)</h4>
+<div class="highlight"><pre><span></span><code>enable
+configure terminal
+fhrp version vrrp v3
+interface type number
+vrrp group-id address-family ipv6
+address ip-address [primary | secondary] 
+end
+</code></pre></div>
+<h3 id="2-huawei">Пример 2 (Huawei)</h3>
+<p>Здесь приведен пример настройки VRRP на Huawei.</p>
+<div class="admonition warning">
+<p class="admonition-title">Требуется эмулятор eNSP, который можно скачать с оф. сайта Huawei</p>
+<p><em>Пример актуален для eNSP 1.3.00 (V100R003C00).</em></p>
+</div>
+<details class="info">
+<summary>Краткая справка по Huawei</summary>
+<p><em>Табл. Сравнение команд</em></p>
+<table>
+<thead>
+<tr>
+<th>Cisco</th>
+<th>Huawei</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>show</td>
+<td>display</td>
+</tr>
+<tr>
+<td>running-configuration</td>
+<td>current-configuration</td>
+</tr>
+<tr>
+<td>clear</td>
+<td>reset</td>
+</tr>
+<tr>
+<td>configure terminal</td>
+<td>system-view</td>
+</tr>
+<tr>
+<td>write</td>
+<td>save</td>
+</tr>
+<tr>
+<td>quit</td>
+<td>exit</td>
+</tr>
+<tr>
+<td>no</td>
+<td>undo</td>
+</tr>
+</tbody>
+</table>
+<p>Выключить интерфейс
+<div class="highlight"><pre><span></span><code>system-view
+interface g0/0/0
+shutdown
+return
+</code></pre></div></p>
+<p>Включить интерфейс
+<div class="highlight"><pre><span></span><code>system-view
+interface g0/0/0
+undo shutdown
+return
+</code></pre></div></p>
+<p>Отобразить текущую конфигурацию устройства
+<div class="highlight"><pre><span></span><code>display current-configuration
+</code></pre></div></p>
+</details>
+<p>Далее приведен пример настройки протокола VRRP на Huawei.</p>
+<p><img alt="Схема сети" src="assets/20.jpg" /></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:3"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">R1 (Router)</label><label for="__tabbed_7_2">R2 (AR3260)</label><label for="__tabbed_7_3">R3 (AR2240)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>system-view
+vrrp version v3
+vrrp version-3 send-packet-mode v3-only
+
+int e0/0/1
+ip add 10.13.0.1 24
+
+int e0/0/0
+ip add 10.12.0.1 24
+vrrp vrid 12 virtual-ip 10.12.0.12
+vrrp vrid 12 priority 250
+
+ip route-static 10.3.0.0 24 10.13.0.3
+
+return
+save
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>system-view
+vrrp version v3
+vrrp version-3 send-packet-mode v3-only
+
+int g0/0/1
+ip add 10.23.0.2 24
+
+int g0/0/0
+ip add 10.12.0.2 24
+vrrp vrid 12 virtual-ip 10.12.0.12
+vrrp vrid 12 priority 200
+
+ip route-static 10.3.0.0 24 10.23.0.3
+
+return
+save
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>system-view
+
+interface g0/0/2
+ip add 10.3.0.3 24
+
+int g0/0/0
+ip add 10.13.0.3 24
+
+int g0/0/1
+ip add 10.23.0.3 24
+
+ip route-static 10.12.0.0 24 10.12.0.1
+ip route-static 10.12.0.0 24 10.23.0.2
+
+return
+save
+</code></pre></div>
+</div>
+</div>
+</div>
+<p><code>display ip int br</code> - посмотреть настроенные адреса на устройстве.</p>
+<p>Настройка ПК выполняется интуитивно просто. Необходимо указать адрес, маску и адрес шлюза.</p>
+<h3 id="3-mikrotik">Пример 3 (MikroTik)</h3>
+<p>Здесь приведен пример настройки VRRP на MikroTik.</p>
+<div class="admonition warning">
+<p class="admonition-title">Актуально для Router OS 7.8 stable.</p>
+</div>
+<h4 id="_12">Преднастройки</h4>
+<p>При добавлении образа MikroTik в GNS3 по умолчанию устанавливается только 1 адаптер, поэтому необходимо увеличить данное число (рисунок ниже).</p>
+<p>Также названия интерефейсов указываются с 0, а в CLI устройства их нумерация начинается с 1. Чтобы не запутаться, рекомендуется исправить в настройках GNS3 параметр, отвечающий за формат имени интерфейсов в GNS3 (рисунок ниже).</p>
+<p><img alt="Схема сети" src="assets/30.png" /></p>
+<h4 id="_13">Настройка сети</h4>
+<p>Далее приведен пример настройки протокола VRRP на MikroTik.</p>
+<p><img alt="Схема сети" src="assets/40.jpg" /></p>
+<div class="admonition warning">
+<p class="admonition-title">При подключении к устройству использовать логин <code>admin</code> и пароль <code>&lt;пусто&gt;</code>. Далее устройство может потребовать изменить пароль.</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:6"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><input id="__tabbed_8_4" name="__tabbed_8" type="radio" /><input id="__tabbed_8_5" name="__tabbed_8" type="radio" /><input id="__tabbed_8_6" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">R1</label><label for="__tabbed_8_2">R2</label><label for="__tabbed_8_3">R3</label><label for="__tabbed_8_4">PC1</label><label for="__tabbed_8_5">PC2</label><label for="__tabbed_8_6">PC3</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>/system/identity/set name=MTk1
+
+/ip/address/add address=10.12.0.1/24 interface=ether1 disabled=no
+/ip/address/add address=10.13.0.1/24 interface=ether2 disabled=no
+
+/ip/route/add dst-address=10.3.0.0/24 gateway=10.13.0.3 disabled=no
+
+interface/vrrp/add version=2 vrid=12 authentication=simple password=pwd preemption-mode=yes priority=250 interface=ether1 interval=3s name=vrrp1
+/ip/address/add address=10.12.0.12/24 interface=vrrp1 disabled=no
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>/system/identity/set name=MTk2
+
+/ip/address/add address=10.12.0.2/24 interface=ether1 disabled=no
+/ip/address/add address=10.23.0.2/24 interface=ether2 disabled=no
+
+/ip/route/add dst-address=10.3.0.0/24 gateway=10.23.0.3 disabled=no
+
+interface/vrrp/add version=2 vrid=12 authentication=simple password=pwd preemption-mode=yes priority=200 interface=ether1 interval=3s name=vrrp1
+/ip/address/add address=10.12.0.12/24 interface=vrrp1 disabled=no
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>/system/identity/set name=MTk3
+
+/ip/address/add address=10.3.0.3/24 interface=ether1 disabled=no
+/ip/address/add address=10.13.0.3/24 interface=ether2 disabled=no
+/ip/address/add address=10.23.0.3/24 interface=ether3 disabled=no
+
+/ip/route/add dst-address=10.12.0.0/24 gateway=10.13.0.1 disabled=no
+/ip/route/add dst-address=10.12.0.0/24 gateway=10.23.0.2 disabled=no
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ip 10.12.0.10/24 10.12.0.12
+save
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ip 10.12.0.20/24 10.12.0.12
+save
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ip 10.3.0.30/24 10.3.0.3
+save
+</code></pre></div>
+</div>
+</div>
+</div>
+<p><code>ip add print</code> - посмотреть настроенные адреса на маршрутизаторе</p>
+<p><code>/interfaces/vrrp/print</code> - посмотреть состояние интерфейса VRRP</p>
+<p><code>/ip/route/print</code> - посмотреть таблицу маршрутизации</p>
+<p>Теперь можно проверить доступность PC3 с PC1</p>
+<div class="highlight"><pre><span></span><code>PC1&gt; ping 10.3.0.30
+
+84 bytes from 10.3.0.30 icmp_seq=1 ttl=62 time=4.527 ms
+84 bytes from 10.3.0.30 icmp_seq=2 ttl=62 time=1.783 ms
+</code></pre></div>
+<p>В Wireshark можно проследить, что эхо-запрос идет через R1.</p>
+<p>Теперь, если на R2 сделать приоритет группы VRRP выше, чем на R1, то трафик будет проходить через R2.</p>
+<details class="warning">
+<summary>Изменение приоритета</summary>
+<p>При изменении приоритета на более высокий, чем на другом маршрутизаторе в группе, должен быть включен режим preempting.
+<div class="highlight"><pre><span></span><code>/interface/vrrp/edit vrrp1 priority
+</code></pre></div>
+Далее откроется текстовый файл, где нужно изменить значение на необходимое.</p>
+</details>
+<p>В данном примере значение приоритета VRRP изменено на 254. В итоге эхо-запрос изменил путь - теперь проходит через R2.</p>
+<h3 id="4-mikrotik-ipv6">Пример 4 (MikroTik + IPv6)</h3>
+<p><strong>🐞 В виртуализации возникают проблемы с IPv6 и VRRP, схема может быть нестабильной.</strong></p>
+<p>Далее приведен пример настройки протокола VRRP на MikroTik.</p>
+<p><img alt="Схема сети" src="assets/50.jpg" /></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:6"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><input id="__tabbed_9_4" name="__tabbed_9" type="radio" /><input id="__tabbed_9_5" name="__tabbed_9" type="radio" /><input id="__tabbed_9_6" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">R1</label><label for="__tabbed_9_2">R2</label><label for="__tabbed_9_3">R3</label><label for="__tabbed_9_4">PC1</label><label for="__tabbed_9_5">PC2</label><label for="__tabbed_9_6">PC3</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>/system identity set name=MT1
+
+/system package enable ipv6
+/system reboot
+
+/ipv6 address add address=10:12::1/64 interface=ether1 disabled=no
+/ipv6 address add address=10:13::1/64 interface=ether2 disabled=no
+
+/ipv6 route add dst-address=10:3::/64 gateway=10:13::3 disabled=no
+
+/interface vrrp add version=3 vrid=126 preemption-mode=yes priority=250 interface=ether1 interval=3s v3-protocol=ipv6 name=vrrp6
+/ipv6 address add address=10:12::12/64 interface=vrrp6 disabled=no
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>/system identity set name=MT2
+
+/system package enable ipv6
+/system reboot
+
+/ipv6 address add address=10:12::2/64 interface=ether1 disabled=no
+/ipv6 address add address=10:23::2/64 interface=ether2 disabled=no
+
+/ipv6 route add dst-address=10:3::/64 gateway=10:23::3 disabled=no
+
+/interface vrrp add version=3 vrid=126 preemption-mode=yes priority=200 interface=ether1 interval=3s v3-protocol=ipv6 name=vrrp6
+/ipv6 address add address=10:12::12/64 interface=vrrp6 disabled=no
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>/system identity set name=MT3
+
+/system package enable ipv6
+/system reboot
+
+/ipv6 address add address=10:3::3/64 interface=ether1 disabled=no
+/ipv6 address add address=10:13::3/64 interface=ether2 disabled=no
+/ipv6 address add address=10:23::3/24 interface=ether3 disabled=no
+
+/ipv6 route add dst-address=10:12::/64 gateway=10:13::1 disabled=no
+/ipv6 route add dst-address=10:12::/64 gateway=10:23::2 disabled=no
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ip 10:12::10/64
+save
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ip 10:12::20/64
+save
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ip 10:3::30/64
+save
+</code></pre></div>
+</div>
+</div>
+</div>
+<p><code>/ipv6 add print</code> - посмотреть настроенные адреса на маршрутизаторе можно с помощью команды.</p>
+<p><code>/ipv6/route/print</code> - посмотреть таблицу маршрутизации</p>
+<p>Теперь можно проверить доступность PC3 с PC1</p>
+<div class="highlight"><pre><span></span><code>PC1&gt; ping 10.3.0.30
+
+84 bytes from 10.3.0.30 icmp_seq=1 ttl=62 time=4.527 ms
+84 bytes from 10.3.0.30 icmp_seq=2 ttl=62 time=1.783 ms
+</code></pre></div>
+<h3 id="5-linux">Пример 5 (Linux)</h3>
+<p><code>keepalived</code> - пакет, реализующий VRRP.</p>
+<p><code>apt-get install keepalived</code> - установка в Debian.</p>
+<p><code>/etc/keepalive(d)/keepalive(d).conf</code> - файл конфигурации.</p>
+<p>Включить маршрутизацию</p>
+<div class="highlight"><pre><span></span><code>echo net.ipv4.ip_forward=1 &gt;&gt; /etc/net/sysctl.conf
+sysctl -p
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>systemctl enable --now keepalived
+systemctl start keepalived
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Далее пример актуален для Debian 11. Для других версий возможны небольшие изменения.</p>
+</div>
+<p><img alt="linux-net" src="assets/60.jpg" /></p>
+<p>Для настройки нужно установить пакет <code>keepalived</code> (<a href="https://keepalived.readthedocs.io/en/latest/index.html">документация</a>)
+<div class="highlight"><pre><span></span><code>apt install keepalived
+</code></pre></div></p>
+<p>Возможно, потребуется добавить репозиторий в файл <code>/etc/apt/sources.list</code>
+<div class="highlight"><pre><span></span><code>deb http://deb.debian.org/debian bullseye  main contrib
+deb-src http://deb.debian.org/debian bullseye  main contrib
+</code></pre></div></p>
+<p>После этого обновить список пакетов
+<div class="highlight"><pre><span></span><code>apt update
+</code></pre></div></p>
+<p>Далее приведены настройки для примера. Часть параметров можно было не указывать - использовались бы значения по умолчанию. Настройки должны быть в файле <code>/etc/keepalived/keepalived.conf</code>.</p>
+<p>Параметр <code>virtual_router_id</code> должен быть одинаковым в пределах одной группы.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">R1</label><label for="__tabbed_10_2">R2</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>global_defs {}
+
+vrrp_instance vrrp1 {
+    state MASTER
+    interface ens33
+    virtual_router_id 100
+    priority 200
+    advert_int 3
+    authentication {
+        auth_type PASS
+        auth_pass password1
+    }
+    virtual_ipaddress {
+        10.1.0.12/24
+    }
+}
+
+vrrp_instance vrrp2 {
+    state BACKUP
+    interface ens32
+    virtual_router_id 200
+    priority 100
+    advert_int 3
+    authentication {
+        auth_type PASS
+        auth_pass password2
+    }
+    virtual_ipaddress {
+        10.2.0.12/24
+    }
+}
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>global_defs {}
+
+vrrp_instance vrrp1 {
+    state BACKUP
+    interface ens33
+    virtual_router_id 100
+    priority 200
+    advert_int 3
+    authentication {
+        auth_type PASS
+        auth_pass password1
+    }
+    virtual_ipaddress {
+        10.1.0.12/24
+    }
+}
+
+vrrp_instance vrrp2 {
+    state MASTER
+    interface ens32
+    virtual_router_id 200
+    priority 100
+    advert_int 3
+    authentication {
+        auth_type PASS
+        auth_pass password2
+    }
+    virtual_ipaddress {
+        10.2.0.12/24
+    }
+}
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Далее можно запустить сервис <code>keepalived</code></p>
+<div class="highlight"><pre><span></span><code>systemctl start keepalived
+</code></pre></div>
+<p>После некоторого времени на маршрутизаторах появятся дополнительные адреса.</p>
+<p><img alt="linux_r1_ip" src="assets/linux_r1_ip.png" /></p>
+<p><img alt="linux_r2_ip" src="assets/linux_r2_ip.png" /></p>
+<p>Далее можно проверить статус сервиса <code>keepalived</code></p>
+<div class="highlight"><pre><span></span><code>systemctl status keepalived
+</code></pre></div>
+<p><img alt="linux_r1_keepalived-service-view" src="assets/linux_r1_keepalived-service-view.png" /></p>
+<p><img alt="linux_r2_keepalived-service-view" src="assets/linux_r2_keepalived-service-view.png" /></p>
+<p>На рисунках показано, как менялся статус устройства в пределах FHRP-групп.</p>
+<p>На клиентах необходимо указать в качестве шлюза 10.1.0.12 и 10.2.0.12. После чего можно проверить с помощью <code>traceroute</code>, как проходит трафик.</p>
+<p><img alt="linux_client1" src="assets/linux_client1.png" /></p>
+<p><img alt="linux_client2" src="assets/linux_client2.png" /></p>
+<p>Трафик проходит через разные маршрутизаторы, т.к. в разных группах разные <code>MASTER</code>-маршрутизаторы.</p>
+<h2 id="_14">🧰 Лабораторная работа</h2>
+<details class="info">
+<summary>Ознакомиться перед выполнением</summary>
+<ul>
+<li>Вместо ❔ или <code>x</code> нужно подставить свой номер по журналу</li>
+<li>Выполнять задание без "отмашки" <strong>не стоит</strong> ⛔, т.к. задание здесь может отличаться от актуальной версии</li>
+<li>У каждой работы есть <strong>срок сдачи</strong> 📅, который озвучивается на занятии, после которого работа не может быть защищена на максимальный балл 📉</li>
+<li><strong>Дополнительные задания</strong> 📚  не являются обязательными, но по результатам сдачи лабораторной работы может быть выдано одно или несколько из них. Также дополнительное задание может быть сформулировано <strong>устно</strong></li>
+<li>Для каждой лабораторной работы должен быть <strong>отчет</strong> 📝 с описанием выполнения ваших действий, оформление должно соответствовать требованиям (см. на сайте учебного заведения)</li>
+<li>Нужно уметь ответить на <strong>вопросы</strong> ❓ по теме, контрольные вопросы и другие связанные вопросы</li>
+<li>Примеры могут быть выполнены <strong>по желанию</strong>, а также выданы в качестве дополнительного задания с изменениями или без <strong>в случае неуспешной 😢 защиты основной работы</strong></li>
+<li>Иногда в работах встречаются задания по <strong>IPv4 и IPv6</strong> одновременно 🔗. Это считается как <strong>одна работа</strong>. Допускается сдача работы только с IPv4 или только с IPv6, но <strong>максимальный балл</strong> в таком случае <strong>получить невозможно</strong></li>
+</ul>
+</details>
+<p><strong>🎯 Цель работы:</strong> получить навыки настройки протокола VRRP в разных ОС.</p>
+<h3 id="_15">Схема</h3>
+<p><img alt="Схема сети" src="assets/lab.jpg" /></p>
+<h3 id="_16">Условия</h3>
+<ol>
+<li>Везде использовать VRRP</li>
+<li>В качестве устройств VRRP использовать Cisco, Linux и MikroTik (где какое и сколько - решать вам, но как минимум по одному каждое)</li>
+<li>Адрес исходной IPv4-сети – <code>10.x.0.0/16</code></li>
+<li>Разделить исходую сеть на 7 подсетей</li>
+<li>Адреса везде назначить статически</li>
+<li>Номера групп VRRP - <code>100 + x</code>, <code>200 + x</code></li>
+<li>Адреса виртуальных маршрутизаторов в каждой группе – последний адрес подсети</li>
+<li>Везде использовать статическую маршрутизация (может потребоваться настроить SLA - мониторинг маршрута)</li>
+<li>Все устройства после настройки должны "пинговаться"</li>
+<li>При отключении любого маршрутизатора, связь между оставшимися должна остаться</li>
+</ol>
+<h3 id="_17">📚 Дополнительные задания</h3>
+<ol>
+<li>Повторить указанный пример.</li>
+<li>Заменить маршрутизаторы на указанный.</li>
+<li>Изменить адресацию и подсети на указанные.</li>
+</ol>
+<h3 id="_18">🤔 Контрольные вопросы</h3>
+<ol>
+<li>Сколько групп VRRP можно создать на устройстве? Чем это обосновано?</li>
+<li>На какой адрес отправляются сообщения VRRP?</li>
+<li>Что будет, если в одной группе на маршрутизаторах задать разные виртуальные IP-адреса?</li>
+<li>Что будет, если включить preempt на маршрутизаторе с приоритетом ниже, чем на другом маршрутизаторе?</li>
+<li>Какую информацию можно увидеть в Wireshark после выключения интерфейса (который используется в протоколе) на маршрутизаторе с ролью Active?</li>
+<li>Что произойдет, если указать разные на маршрутизаторах из одной группы?</li>
+<li>Если в группу добавить еще один маршрутизатор с самым низким/высоким приоритетом, то в каком состоянии он окажется? Какую роль он получит, если отключить один из первых двух маршрутизаторов?</li>
+<li>Какие способы разделения на подсети существуют?</li>
+<li>Как зависит длина маски и префикса от количества необходимых подсетей или устройств в каждой подсети?</li>
+<li>Как посчитать количество подсетей на схеме?</li>
+<li>Какие режимы балансировки имеются в GLBP? В чем их особенность?</li>
+<li>Как можно выполнить балансировку нагрузки в протоколе HSRP или VRRP?</li>
+<li>Если выполнить эхо-запрос из одной сети в другую, то каким маршрутом пакеты идут в одну сторону, а каким - обратно? Всегда ли пути (туда и обратно) одинаковы?</li>
+<li>Какой адрес используют маршрутизаторы для обмена служебными сообщениями по изучаемым в данной работе протоколам?</li>
+<li>По какому правилу формируется MAC-адрес виртуальных маршрутизаторов в каждом протоколе?</li>
+</ol>
+<style>
+    .copyright {
+        color: gray;
+        font-size: 0.6rem;
+    }
+</style>
+
+<div class="copyright">
+
+<hr>
+
+Используя данный сайт и его ресурсы, вы соглашаетесь с <a href=/policy/> политикой и соглашениями сайта</a>.<br>
+
+©️ Оформление, изложение, медиаматериалы. И. Попов, 2020-2025<br>
+
+Сделано с помощью Material for MkDocs.<br>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

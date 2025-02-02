@@ -1,0 +1,1591 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../rip/">
+      
+      
+        <link rel="next" href="../wlan/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.44">
+    
+    
+      
+        <title>OSPF - net.lab</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Nunito";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ospf" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="net.lab" class="md-header__button md-logo" aria-label="net.lab" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            net.lab
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              OSPF
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="net.lab" class="md-nav__button md-logo" aria-label="net.lab" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    net.lab
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stand/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🛠️ Стенд
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    🌐 Сети
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            🌐 Сети
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vpcs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Первая схема в GNS3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../switch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Коммутатор
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Маршрутизатор
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subnets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Деление на подсети
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../static-routing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Статическая маршрутизация
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ipv6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPv6
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../icmp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ICMP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vlan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VLAN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fhrp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FHRP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tcp-udp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TCP/UDP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../acl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ACL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nat/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NAT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dhcp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DHCP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mstp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MSTP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RIP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    OSPF
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    OSPF
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Теоретические сведения
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Теоретические сведения">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#router-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      Router ID
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Области
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Примеры
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Примеры">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ospfv2-cisco" class="md-nav__link">
+    <span class="md-ellipsis">
+      OSPFv2 + Cisco
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ospfv3-cisco" class="md-nav__link">
+    <span class="md-ellipsis">
+      OSPFv3 + Cisco
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ospf-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Особенности настройки OSPF в Linux
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧠 Самостоятельная работа
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧰 Лабораторная работа
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧰 Лабораторная работа">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Схема
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Условия
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Дополнительные задания
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      🤔 Контрольные вопросы
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wlan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WLAN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    🚢 Контейнеризация и оркестрация
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            🚢 Контейнеризация и оркестрация
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../containers/docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../containers/docker%2Bgns3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker + GNS3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    🔒 Безопасность
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            🔒 Безопасность
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/ipds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPDS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    🗃️ Прочее
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            🗃️ Прочее
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../other/iperf3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    iperf3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../other/mkdocs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MkDocs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../other/jupyter-notebook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jupyter Notenetwork
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    О сайте
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Теоретические сведения
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Теоретические сведения">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#router-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      Router ID
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Области
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Примеры
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Примеры">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ospfv2-cisco" class="md-nav__link">
+    <span class="md-ellipsis">
+      OSPFv2 + Cisco
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ospfv3-cisco" class="md-nav__link">
+    <span class="md-ellipsis">
+      OSPFv3 + Cisco
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ospf-linux" class="md-nav__link">
+    <span class="md-ellipsis">
+      Особенности настройки OSPF в Linux
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧠 Самостоятельная работа
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧰 Лабораторная работа
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧰 Лабораторная работа">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Схема
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      Условия
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Дополнительные задания
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      🤔 Контрольные вопросы
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<style>
+    .author {
+        color: gray;
+        font-size: 0.6rem;
+        text-align: right;
+    }
+</style>
+
+<div class="author">
+Автор: И. Попов
+</div>
+
+<h1 id="ospf">OSPF</h1>
+<h2 id="_1">Теоретические сведения</h2>
+<h3 id="router-id">Router ID</h3>
+<ul>
+<li>ID маршрутизатора в OSPF</li>
+<li>Используется при обмене сообщениями в рамках OSPF</li>
+</ul>
+<p>Правила выбора:</p>
+<ol>
+<li>Назначен вручную</li>
+<li>Максимальный адрес среди интерфейсов loopback</li>
+<li>Максимальный IP-адрес среди остальных интерфесов</li>
+</ol>
+<h3 id="_2">Области</h3>
+<ul>
+<li>Область 0 - магистральная (backbone)</li>
+<li>К области 0 должны быть подключены другие области<ul>
+<li>Напрямую</li>
+<li>С помощью виртуального канала (virtual link)</li>
+</ul>
+</li>
+</ul>
+<h2 id="_3">Примеры</h2>
+<h3 id="ospfv2-cisco">OSPFv2 + Cisco</h3>
+<p>Включить объявление сети 192.168.1.0/24 в области 0:</p>
+<div class="highlight"><pre><span></span><code>conf t
+router ospf 1
+network 192.168.1.0 0.0.0.255 area 0
+</code></pre></div>
+<p>Назначить пассивный интерфейс:</p>
+<div class="highlight"><pre><span></span><code>conf t
+router ospf 1
+passive-interface е0/0
+</code></pre></div>
+<p>Задать стоимость интерфейса:</p>
+<div class="highlight"><pre><span></span><code>conf t
+int e0/0
+ip ospf cost 20
+</code></pre></div>
+<p>Включить аутентификацию с помощью простого текста в области 0:</p>
+<div class="highlight"><pre><span></span><code>conf t
+router ospf 1
+area 0 authentication
+exit
+int e0/0
+ip ospf authentication-key netlab
+</code></pre></div>
+<p>Создать виртуальный канал:</p>
+<div class="highlight"><pre><span></span><code>conf t
+router ospf 1
+area 1 virtual-link 10.10.10.10
+</code></pre></div>
+<p><strong>⚠️ Команды выполняются с двух сторон виртуального канала.</strong></p>
+<blockquote>
+<p>Обычно нужно указывать Router ID в качестве точки подключения виртуального канала.</p>
+</blockquote>
+<p>Посмотреть настройки виртуальных каналов:</p>
+<div class="highlight"><pre><span></span><code>show ip ospf virtual-links
+</code></pre></div>
+<p>Посмотреть соседние маршрутизаторы:</p>
+<div class="highlight"><pre><span></span><code>show ip ospf neighbor
+</code></pre></div>
+<p>Задать идентификатор маршрутизатора (Router ID):</p>
+<div class="highlight"><pre><span></span><code>conf t
+router ospf 1
+router-id 1.1.1.1
+</code></pre></div>
+<p>Задать приоритет на маршрутизаторе:</p>
+<div class="highlight"><pre><span></span><code>conf t
+ip ospf priority ?
+</code></pre></div>
+<p>Включить редистрибюцию напрямую подключенных сетей:</p>
+<div class="highlight"><pre><span></span><code>conf t
+router ospf
+redistribute connected
+</code></pre></div>
+<p>Перезагрузить процессы OSPF:</p>
+<div class="highlight"><pre><span></span><code>clear ip ospf process
+</code></pre></div>
+<p>Посмотреть таблицу маршрутизации:</p>
+<div class="highlight"><pre><span></span><code>show ip route
+</code></pre></div>
+<h3 id="ospfv3-cisco">OSPFv3 + Cisco</h3>
+<p>Запустить процесс OSPF с номером 1:</p>
+<div class="highlight"><pre><span></span><code>conf t
+ipv6 router ospf 1
+</code></pre></div>
+<p>Задать Router ID:</p>
+<div class="highlight"><pre><span></span><code>conf t
+ipv6 router ospf 1
+router-id ?
+</code></pre></div>
+<p>Объявление маршрута по умолчанию:</p>
+<div class="highlight"><pre><span></span><code>conf t
+ipv6 router ospf 1
+default-information originate
+</code></pre></div>
+<p>Включить пассивный интерфейс:</p>
+<div class="highlight"><pre><span></span><code>conf t
+ipv6 router ospf 1
+passive-interface e0/0
+</code></pre></div>
+<p>Сделать все интерфейсы пассивными (для того, чтобы сделать отдельный интерфейс активным, необходимо выполнить команду <code>no passive-interface e0/0</code>):</p>
+<div class="highlight"><pre><span></span><code>conf t
+ipv6 router ospf 1
+passive-interface default
+</code></pre></div>
+<p>Посмотреть настройки:</p>
+<div class="highlight"><pre><span></span><code>show ipv6 ospf
+</code></pre></div>
+<p>Объявление сети:</p>
+<div class="highlight"><pre><span></span><code>conf t
+interface e0/0
+ipv6 ospf 1 area 0
+</code></pre></div>
+<p>Проверить соседей OSPFv3:</p>
+<div class="highlight"><pre><span></span><code>show ipv6 ospf neighbor
+</code></pre></div>
+<p>Посмотреть таблицу маршрутизации IPv6:</p>
+<div class="highlight"><pre><span></span><code>show ipv6 route
+</code></pre></div>
+<h2 id="ospf-linux">Особенности настройки OSPF в Linux</h2>
+<p><strong>⚠️ Все команды и названия актуальны для Linux Alpine, но они также могут подойти на другие дистрибутивы Linux.</strong></p>
+<ol>
+<li>
+<p>Установить пакет <code>frr</code>. Возможно, потребуется указать необходимый репозиторий, в котором находится пакет.</p>
+<p>🔗 <a href="https://frrouting.org/doc/">FRRouting Documentation</a></p>
+<p>🔗 <a href="https://pkgs.alpinelinux.org/packages?name=frr">FRR package в Alpine</a></p>
+</li>
+<li>
+<p>Включить демона <code>ospfd</code> в конфигурационном файле <code>/etc/frr/daemons</code>.</p>
+<div class="highlight"><pre><span></span><code>ospfd=yes
+</code></pre></div>
+</li>
+<li>
+<p>Необходимо указать ID процессов OSPF (в данном случае достаточно одного ID):</p>
+<div class="highlight"><pre><span></span><code>ospfd_instances=1,2,...
+</code></pre></div>
+</li>
+<li>
+<p>Запустить сервис и добавить в автозапуск</p>
+<div class="highlight"><pre><span></span><code>/etc/init.d/frr start
+rc-update add frr
+</code></pre></div>
+<blockquote>
+<p>Добавлять в автозапуск не обязательно, но при перезагрузке придется вручную стартовать демона.</p>
+</blockquote>
+</li>
+<li>
+<p>Подключиться к консоли виртуального маршрутизатора</p>
+<div class="highlight"><pre><span></span><code>vtysh
+</code></pre></div>
+<p><strong>💡 Откроется терминал, напоминающий CLI Cisco.</strong>
+Команды также очень похожи (для помощи необходимо ввести <code>?</code>). Через данный CLI можно настроить не только маршрутизацию, но и адреса на интерфейсах.</p>
+</li>
+<li>
+<p>Объявление сети происходит на интерфейсе</p>
+<div class="highlight"><pre><span></span><code>conf t
+int eth0
+ip ospf {instance ID} area {area number}
+</code></pre></div>
+</li>
+<li>
+<p>Редистрибуция маршрутов.</p>
+<div class="highlight"><pre><span></span><code>redistribute ?
+</code></pre></div>
+</li>
+<li>
+<p>Сохранение конфигурации</p>
+<div class="highlight"><pre><span></span><code>wr mem
+</code></pre></div>
+</li>
+<li>
+<p>Обязательно нужно включить маршрутизацию. В конец файла <code>/etc/sysctl.conf</code> добавить строку <code>net.ipv4.ip_forward=1</code>. После этого <code>reboot</code> или <code>sysctl -p</code>.</p>
+</li>
+<li>
+<p>Посмотреть информацию о внешних маршрутах</p>
+<div class="highlight"><pre><span></span><code>sh ip ospf database external
+</code></pre></div>
+</li>
+</ol>
+<h2 id="_4">🧠 Самостоятельная работа</h2>
+<p><strong>⚠️ Несколько областей. Нужны виртуальные каналы.</strong></p>
+<p><img alt="img" src="assets/20.jpg" /></p>
+<h2 id="_5">🧰 Лабораторная работа</h2>
+<details class="info">
+<summary>Ознакомиться перед выполнением</summary>
+<ul>
+<li>Вместо ❔ или <code>x</code> нужно подставить свой номер по журналу</li>
+<li>Выполнять задание без "отмашки" <strong>не стоит</strong> ⛔, т.к. задание здесь может отличаться от актуальной версии</li>
+<li>У каждой работы есть <strong>срок сдачи</strong> 📅, который озвучивается на занятии, после которого работа не может быть защищена на максимальный балл 📉</li>
+<li><strong>Дополнительные задания</strong> 📚  не являются обязательными, но по результатам сдачи лабораторной работы может быть выдано одно или несколько из них. Также дополнительное задание может быть сформулировано <strong>устно</strong></li>
+<li>Для каждой лабораторной работы должен быть <strong>отчет</strong> 📝 с описанием выполнения ваших действий, оформление должно соответствовать требованиям (см. на сайте учебного заведения)</li>
+<li>Нужно уметь ответить на <strong>вопросы</strong> ❓ по теме, контрольные вопросы и другие связанные вопросы</li>
+<li>Примеры могут быть выполнены <strong>по желанию</strong>, а также выданы в качестве дополнительного задания с изменениями или без <strong>в случае неуспешной 😢 защиты основной работы</strong></li>
+<li>Иногда в работах встречаются задания по <strong>IPv4 и IPv6</strong> одновременно 🔗. Это считается как <strong>одна работа</strong>. Допускается сдача работы только с IPv4 или только с IPv6, но <strong>максимальный балл</strong> в таком случае <strong>получить невозможно</strong></li>
+</ul>
+</details>
+<p><strong>🎯 Цель работы:</strong> получить навыки настройки протокола OSPF.</p>
+<h3 id="_6">Схема</h3>
+<p><img alt="img" src="assets/10.jpg" /></p>
+<h3 id="_7">Условия</h3>
+<ol>
+<li>Сетевые настройки на ПК статические</li>
+<li>На R1 и R2 статический маршрут по умолчанию. Больше нигде не должно быть статических маршрутов</li>
+<li>Маршрут по умолчанию распространяется с помощью OSPF</li>
+<li>R3, R4, R4 - устройства на базе <strong>linux</strong></li>
+<li>Любые 2 ПК - устройства на базе <strong>linux</strong></li>
+<li>R1 - DR в <code>10.x.134.1/24</code></li>
+<li>R2 - DR в <code>10.x.245.1/24</code></li>
+<li>R4 - BDR в <code>10.x.134.1/24</code> и <code>10.x.245.1/24</code></li>
+<li>Настроить пассивные интерфейсы, где разумно</li>
+<li>Сеть "Интернет" не распространяется с помощью OSPF</li>
+<li>Везде использовать область 0</li>
+<li>На каждом маршрутизаторе должен быть интерфейс Loopback с адресом <code>х.х.х.х/32</code>, где <code>х</code> - номер маршрутизатора (<code>Rх</code>)</li>
+</ol>
+<h3 id="_8">📚 Дополнительные задания</h3>
+<ol>
+<li>Заменить указанное устройство на другое указанное</li>
+<li>Изменить схему как указано</li>
+<li>Задать на маршрутизаторах RouterID</li>
+<li>Изменить стоимости интерфейсов</li>
+<li>Настроить аутентификацию в OSFP в указанной сети</li>
+<li>Добавить тупиковую сеть к указанному маршрутизатору, настроить VLAN, RoaS, донастроить OSPF</li>
+<li>
+<p>✳️ Выполнить все то же самое только на базе IPv6. Глобальный IPv6-адрес вычислить как <code>2001::{IPv4-адрес}/64</code> (<code>.</code> в IPv4-адресе заменить на <code>:</code>).</p>
+<blockquote>
+<p>Например, если на интерфейсе IPv4-адрес - <code>10.0.1.1/24</code>, тогда IPv6-адрес на том же интерфейсе задать как - <code>2001::10:0:1:1/64</code>.</p>
+</blockquote>
+</li>
+<li>
+<p>✳️ Разделить на области без использования виртуальных каналов</p>
+</li>
+<li>✳️ Разделить на области с использованием виртуальных каналов</li>
+<li>✳️ Выполнить и защитить самостоятельную работу с указанным вариантом</li>
+</ol>
+<h3 id="_9">🤔 Контрольные вопросы</h3>
+<ol>
+<li>Что такое DR и BDR? Как они выбираются?</li>
+<li>Для чего используется RouterID?</li>
+<li>Что такое пассивный интерфейс и зачем он нужен?</li>
+<li>Как сделать R4 DR во всех подключенных к нему сетях?</li>
+<li>Какая административная дистанция у OSPF?</li>
+<li>Что такое метрика и какое ее максимальное значение?</li>
+<li>Для чего используются адреса <code>224.0.0.5</code> и <code>224.0.0.6</code>?</li>
+<li>Сколько маршрутов на <em>указанном</em> маршрутизаторе, полученных <em>указанным</em> способом?</li>
+<li>Если на R5 задать пассивный интерфейс в сторону ПК, то как изменится доступность устройств?</li>
+<li>Если на R5 задать пассивный интерфейс в сторону сети 245, то как изменится доступность устройств?</li>
+<li>Если на R4 задать пассивный интерфейс в сторону сети 134, то как изменится доступность устройств?</li>
+<li>Если на R4 задать пассивный интерфейс в сторону сетей 134 и 245, то как изменится доступность устройств?</li>
+<li>Интерфейс в сторону "Интернета" быть пассивным или нет?</li>
+<li>Зачем нужна аутентификация в OSPF? Что будет, если задать неправильный пароль?</li>
+<li>Можно ли с помощью Wireshark "взломать" аутентификацию в OSPF?</li>
+<li>Что такое виртуальный канал в OSPF и для чего он используется?</li>
+<li>Чем примечательна область 0 в OSPF?</li>
+<li>Как используется интерфейс Loopback в OSPF?</li>
+<li>Что такое ABR и ASBR в OSPF?</li>
+<li>Что такое редистрибуция маршрутов? Для чего используется <code>redistribute connected</code>?</li>
+<li>Можно ли заменить команду <code>network ...</code> на <code>redistribute connected</code>?</li>
+<li>Какая стоимость маршрута между указанными сетями?</li>
+<li>Если "пинговать" неизвестный адрес, то куда уйдут пакеты?</li>
+<li>Останется ли доступ в "Интернет" при отключении R1 или R2?</li>
+<li>Отправляются ли пакеты OSPF из пассивного интерфейса?</li>
+<li>Что произойдет, если включить пассивный интерфейс между маршрутизаторами?</li>
+<li>Как определяется итоговая стоимость пути меджу сетями?</li>
+<li>Что произойдет, если в широковещательном домене из 3 маршрутизаторов отключить DR?</li>
+<li>Чему будет равен Router ID на маршрутизаторе, если удалить все интерфейсы Loopback?</li>
+<li>Почему при выборе Router ID в приоритете интерфейсы Loopback, а не физические?</li>
+</ol>
+<style>
+    .copyright {
+        color: gray;
+        font-size: 0.6rem;
+    }
+</style>
+
+<div class="copyright">
+
+<hr>
+
+Используя данный сайт и его ресурсы, вы соглашаетесь с <a href=/policy/> политикой и соглашениями сайта</a>.<br>
+
+©️ Оформление, изложение, медиаматериалы. И. Попов, 2020-2025<br>
+
+Сделано с помощью Material for MkDocs.<br>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

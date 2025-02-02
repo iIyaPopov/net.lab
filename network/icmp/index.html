@@ -1,0 +1,1936 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../ipv6/">
+      
+      
+        <link rel="next" href="../vlan/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.44">
+    
+    
+      
+        <title>ICMP - net.lab</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0253249f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Nunito";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="pink">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#icmp-icmpv6" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="net.lab" class="md-header__button md-logo" aria-label="net.lab" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            net.lab
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ICMP
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="net.lab" class="md-nav__button md-logo" aria-label="net.lab" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    net.lab
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../stand/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    🛠️ Стенд
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    🌐 Сети
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            🌐 Сети
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vpcs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Первая схема в GNS3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../switch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Коммутатор
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../router/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Маршрутизатор
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subnets/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Деление на подсети
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../static-routing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Статическая маршрутизация
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ipv6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPv6
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    ICMP
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    ICMP
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#icmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Зачем нужен протокол ICMP
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#icmp_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Сообщения ICMP
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Примеры
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Примеры">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-cisco" class="md-nav__link">
+    <span class="md-ellipsis">
+      Пример 1 (Cisco)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-huawei" class="md-nav__link">
+    <span class="md-ellipsis">
+      Пример 2 (Huawei)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-mikrotik" class="md-nav__link">
+    <span class="md-ellipsis">
+      Пример 3 (MikroTik)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-mikrotik-cisco-ipv6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Пример 4 (MikroTik + Cisco + IPv6)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧰 Лабораторная работа
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧰 Лабораторная работа">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Схема
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Условия
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Дополнительные задания
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      🤔 Контрольные вопросы
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vlan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VLAN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fhrp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FHRP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tcp-udp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TCP/UDP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../acl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ACL
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nat/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NAT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dhcp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DHCP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mstp/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MSTP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rip/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RIP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ospf/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OSPF
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wlan/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WLAN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    🚢 Контейнеризация и оркестрация
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            🚢 Контейнеризация и оркестрация
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../containers/docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../containers/docker%2Bgns3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker + GNS3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    🔒 Безопасность
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            🔒 Безопасность
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../security/ipds/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    IPDS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    🗃️ Прочее
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            🗃️ Прочее
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../other/iperf3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    iperf3
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../other/mkdocs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MkDocs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../other/jupyter-notebook/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jupyter Notenetwork
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    О сайте
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#icmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Зачем нужен протокол ICMP
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#icmp_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Сообщения ICMP
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Примеры
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Примеры">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-cisco" class="md-nav__link">
+    <span class="md-ellipsis">
+      Пример 1 (Cisco)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-huawei" class="md-nav__link">
+    <span class="md-ellipsis">
+      Пример 2 (Huawei)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-mikrotik" class="md-nav__link">
+    <span class="md-ellipsis">
+      Пример 3 (MikroTik)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-mikrotik-cisco-ipv6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Пример 4 (MikroTik + Cisco + IPv6)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      🧰 Лабораторная работа
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🧰 Лабораторная работа">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Схема
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Условия
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Дополнительные задания
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      🤔 Контрольные вопросы
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<style>
+    .author {
+        color: gray;
+        font-size: 0.6rem;
+        text-align: right;
+    }
+</style>
+
+<div class="author">
+Автор: И. Попов
+</div>
+
+<h1 id="icmp-icmpv6">ICMP / ICMPv6</h1>
+<h2 id="icmp">Зачем нужен протокол ICMP</h2>
+<p>Это служебный протокол, использующийся устройствами для сообщения друг другу об ошибках или о некоторых событиях.</p>
+<p>Существует 2 популярные команды, которые используют данный протокол:</p>
+<ul>
+<li><code>ping</code> - проверка доступности устройства,</li>
+<li><code>traceroute</code> - построение пути до адреса назначения.</li>
+</ul>
+<h2 id="icmp_1">Сообщения ICMP</h2>
+<p>Существует достаточно большое количество сообщений ICMP, но ниже приведены только наиболее часто встречающиеся:</p>
+<ul>
+<li><code>Echo request</code> - эхо-запрос,</li>
+<li><code>Echo reply</code> - эхо-ответ,</li>
+<li><code>Timeout</code> - время ожидания истекло,</li>
+<li><code>Host unreachable</code> - узел недостижим,</li>
+<li><code>Network unreachable</code> - сеть недостижима,</li>
+<li><code>TTL expired</code> - время жизни пакета истекло.</li>
+</ul>
+<p>В версии ICMPv6 еще можно выделить:</p>
+<ul>
+<li><code>RS</code> - поиск соседнего маршрутизатора,</li>
+<li><code>RA</code> - объявление соседнего маршрутизатора,</li>
+<li><code>NS</code> - поиск соседнего узла,</li>
+<li><code>NA</code> - объявление соседнего узла.</li>
+</ul>
+<h2 id="_1">Примеры</h2>
+<h3 id="1-cisco">Пример 1 (Cisco)</h3>
+<p><strong>Схема</strong></p>
+<p><img alt="img" src="assets/example_cisco.png" /></p>
+<p><strong>Настройка</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:6"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">R1</label><label for="__tabbed_1_2">R2</label><label for="__tabbed_1_3">R3</label><label for="__tabbed_1_4">PC1</label><label for="__tabbed_1_5">PC2</label><label for="__tabbed_1_6">PC3</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+
+hostname R1
+
+int e0/0
+ip add 10.1.0.1 255.255.255.0
+no sh
+
+int e0/1
+ip add 10.13.0.1 255.255.255.0
+no sh
+exit
+
+ip route 0.0.0.0 0.0.0.0 10.13.0.3
+
+end
+wr mem
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+
+hostname R2
+
+int e0/0
+ip add 10.2.0.2 255.255.255.0
+no sh
+
+int e0/1
+ip add 10.23.0.2 255.255.255.0
+no sh
+exit
+
+ip route 0.0.0.0 0.0.0.0 10.23.0.3
+
+end
+wr mem
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+
+hostname R3
+
+int e0/0
+ip add 10.3.0.3 255.255.255.0
+no sh
+
+int e0/1
+ip add 10.13.0.3 255.255.255.0
+no sh
+
+int e0/2
+ip add 10.23.0.3 255.255.255.0
+no sh
+exit
+
+ip route 10.1.0.0 255.255.255.0 10.13.0.1
+ip route 10.1.0.0 255.255.255.0 10.23.0.2
+
+end
+wr mem
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ip 10.1.0.10/24 10.1.0.1
+save
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ip 10.2.0.10/24 10.2.0.2
+save
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ip 10.3.0.10/24 10.3.0.3
+save
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Проверить таблицу маршрутизации можно с помощью команды</p>
+<div class="highlight"><pre><span></span><code>show ip route
+</code></pre></div>
+<p>Выполнить трассировку маршрута на ПК можно с помощью команды</p>
+<div class="highlight"><pre><span></span><code>trace {IP}
+</code></pre></div>
+<h3 id="2-huawei">Пример 2 (Huawei)</h3>
+<p><strong>⚠️ Необходим эмулятор eNSP.</strong></p>
+<p>Дополнительно о статической маршрутизации на Huawei можно почитать <a href="https://support.huawei.com/enterprise/en/doc/EDOC1000069520/743f6e24/typical-static-route-configuration">здесь</a>.</p>
+<p><strong>Схема</strong></p>
+<p><img alt="img" src="assets/example_huawei.png" /></p>
+<p><strong>Настройка</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:4"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">R1 (Router)</label><label for="__tabbed_2_2">R2 (Router)</label><label for="__tabbed_2_3">R3 (Router)</label><label for="__tabbed_2_4">R4 (Router)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>system-view
+
+sysname R1
+
+int e0/0/0
+ip add 10.1.0.1 24
+
+int e0/0/1
+ip add 10.12.0.1 24
+
+int g0/0/0
+ip add 10.13.0.1 24
+quit
+
+ip route-static 10.24.0.0 24 10.12.0.2
+ip route-static 10.4.0.0 24 10.12.0.2
+ip route-static 10.4.0.0 24 10.13.0.3
+ip route-static 10.34.0.0 24 10.13.0.3
+ip route-static 10.3.0.0 24 10.13.0.3
+
+return
+save
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>system-view
+
+sysname R2
+
+int e0/0/0
+ip add 10.12.0.2 24
+
+int e0/0/1
+ip add 10.24.0.2 24
+quit
+
+ip route-static 10.3.0.0 24 10.12.0.1
+ip route-static 10.3.0.0 24 10.24.0.4
+ip route-static 10.1.0.0 24 10.12.0.1
+ip route-static 10.4.0.0 24 10.24.0.4
+ip route-static 10.13.0.0 24 10.12.0.1
+ip route-static 10.34.0.0 24 10.24.0.4
+
+return
+save
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>system-view
+
+sysname R3
+
+int g0/0/0
+ip add 10.13.0.3 24
+
+int g0/0/1
+ip add 10.34.0.3 24
+
+int e0/0/0
+ip add 10.3.0.3 24
+quit
+
+ip route-static 10.1.0.0 24 10.13.0.1
+ip route-static 10.4.0.0 24 10.34.0.4
+ip route-static 10.12.0.0 24 10.13.0.1
+ip route-static 10.24.0.0 24 10.34.0.4
+
+return
+save
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>system-view
+
+sysname R4
+
+int e0/0/0
+ip add 10.4.0.4 24
+
+int e0/0/1
+ip add 10.24.0.4 24
+
+int g0/0/0
+ip add 10.34.0.4 24
+quit
+
+ip route-static 10.1.0.0 24 10.24.0.2
+ip route-static 10.1.0.0 24 10.34.0.3
+ip route-static 10.12.0.0 24 10.24.0.2
+ip route-static 10.13.0.0 24 10.34.0.3
+ip route-static 10.3.0.0 24 10.34.0.3
+
+return
+save
+</code></pre></div>
+</div>
+</div>
+</div>
+<p><strong>Проверка</strong></p>
+<p>Посмотреть таблицу маршрутизации на R1</p>
+<div class="highlight"><pre><span></span><code>[R1]display ip routing-table 
+</code></pre></div>
+<p>Результат вывода команды</p>
+<div class="highlight"><pre><span></span><code>Route Flags: R - relay, D - download to fib
+------------------------------------------------------------------------------
+Routing Tables: Public
+         Destinations : 12       Routes : 13       
+
+Destination/Mask    Proto   Pre  Cost      Flags NextHop         Interface
+
+       10.1.0.0/24  Direct  0    0           D   10.1.0.1        Ethernet0/0/0
+       10.1.0.1/32  Direct  0    0           D   127.0.0.1       Ethernet0/0/0
+       10.3.0.0/24  Static  60   0          RD   10.13.0.3       GigabitEthernet0/0/0
+       10.4.0.0/24  Static  60   0          RD   10.12.0.2       Ethernet0/0/1
+                    Static  60   0          RD   10.13.0.3       GigabitEthernet0/0/0
+      10.12.0.0/24  Direct  0    0           D   10.12.0.1       Ethernet0/0/1
+      10.12.0.1/32  Direct  0    0           D   127.0.0.1       Ethernet0/0/1
+      10.13.0.0/24  Direct  0    0           D   10.13.0.1       GigabitEthernet0/0/0
+      10.13.0.1/32  Direct  0    0           D   127.0.0.1       GigabitEthernet0/0/0
+      10.24.0.0/24  Static  60   0          RD   10.12.0.2       Ethernet0/0/1
+      10.34.0.0/24  Static  60   0          RD   10.13.0.3       GigabitEthernet0/0/0
+      127.0.0.0/8   Direct  0    0           D   127.0.0.1       InLoopBack0
+      127.0.0.1/32  Direct  0    0           D   127.0.0.1       InLoopBack0
+</code></pre></div>
+<p>Посмотреть таблицу маршрутизации (статические записи) на R1</p>
+<div class="highlight"><pre><span></span><code>[R1]display ip routing-table protocol static 
+</code></pre></div>
+<p>Результат вывода команды</p>
+<div class="highlight"><pre><span></span><code>Route Flags: R - relay, D - download to fib
+------------------------------------------------------------------------------
+Public routing table : Static
+         Destinations : 4        Routes : 5        Configured Routes : 5
+
+Static routing table status : &lt;Active&gt;
+         Destinations : 4        Routes : 5
+
+Destination/Mask    Proto   Pre  Cost      Flags NextHop         Interface
+
+       10.3.0.0/24  Static  60   0          RD   10.13.0.3       GigabitEthernet0/0/0
+       10.4.0.0/24  Static  60   0          RD   10.12.0.2       Ethernet0/0/1
+                    Static  60   0          RD   10.13.0.3       GigabitEthernet0/0/0
+      10.24.0.0/24  Static  60   0          RD   10.12.0.2       Ethernet0/0/1
+      10.34.0.0/24  Static  60   0          RD   10.13.0.3       GigabitEthernet0/0/0
+
+Static routing table status : &lt;Inactive&gt;
+         Destinations : 0        Routes : 0
+</code></pre></div>
+<p>Резульатат проверки доступности R4 с R1</p>
+<div class="highlight"><pre><span></span><code>[R1]ping 10.4.0.4
+  PING 10.4.0.4: 56  data bytes, press CTRL_C to break
+    Reply from 10.4.0.4: bytes=56 Sequence=1 ttl=254 time=120 ms
+    Reply from 10.4.0.4: bytes=56 Sequence=2 ttl=254 time=50 ms
+    Reply from 10.4.0.4: bytes=56 Sequence=3 ttl=254 time=50 ms
+    Reply from 10.4.0.4: bytes=56 Sequence=4 ttl=254 time=80 ms
+    Reply from 10.4.0.4: bytes=56 Sequence=5 ttl=254 time=80 ms
+
+  --- 10.4.0.4 ping statistics ---
+    5 packet(s) transmitted
+    5 packet(s) received
+    0.00% packet loss
+    round-trip min/avg/max = 50/76/120 ms
+</code></pre></div>
+<p>Если выполнить трассировку маршрута с PC3 до PC1, то получится следующий результат</p>
+<div class="highlight"><pre><span></span><code>PC2&gt;tracert 10.1.0.10
+
+traceroute to 10.1.0.10, 8 hops max
+(ICMP), press Ctrl+C to stop
+ 1  10.3.0.3   15 ms  32 ms  15 ms
+ 2  10.13.0.1   47 ms  47 ms  31 ms
+ 3  10.1.0.10   78 ms  63 ms  62 ms
+</code></pre></div>
+<p>Получилось, что трафик идет по кратчайшему пути.</p>
+<p>Теперь можно добавить еще один маршрут до сети, где PC1, который проходит через R4. При этом необходимо удалить маршрут на R4 в сторону сети, где PC1, который проходит через R3. На R3 также нужно удалить кратчайший маршрут либо отключить интерфейс. На R2 также нужно удалить маршурт в сторону PC2, проходящий через R1. На R1 добавить маршрут в сеть PC2, проходящий через R2.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:4"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">R1</label><label for="__tabbed_3_2">R2</label><label for="__tabbed_3_3">R3</label><label for="__tabbed_3_4">R4</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>system-view
+ip route-static 10.3.0.0 24 10.12.0.2
+int g0/0/0
+shutdown
+return
+save
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>system-view
+undo ip route-static 10.3.0.0 24 10.12.0.1
+return
+save
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>system-view
+ip route-static 10.1.0.0 24 10.34.0.4
+int g0/0/0
+shutdown
+return
+save
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>system-view
+undo ip route-static 10.1.0.0 24 10.34.0.3
+return
+save
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Результат трассировки с PC2 до PC1</p>
+<div class="highlight"><pre><span></span><code>PC2&gt;tracert 10.1.0.10
+
+traceroute to 10.1.0.10, 8 hops max
+(ICMP), press Ctrl+C to stop
+ 1  10.3.0.3   15 ms  32 ms  15 ms
+ 2  10.34.0.4   78 ms  47 ms  47 ms
+ 3  10.24.0.2   78 ms  63 ms  78 ms
+ 4  10.12.0.1   94 ms  93 ms  94 ms
+ 5  10.1.0.10   125 ms  125 ms  109 ms
+</code></pre></div>
+<p>Теперь трафик проходит через "верх".</p>
+<h3 id="3-mikrotik">Пример 3 (MikroTik)</h3>
+<p><strong>⚠️ Актуально для версии Router OS 7.8 stable.<br>По умолчанию логин - <code>admin</code>, пароль - <code>{ пустой }</code>.</strong></p>
+<p><strong>Схема</strong></p>
+<p><img alt="Схема сети" src="assets/example_mikrotik.png" /></p>
+<p><strong>Настройка</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:6"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><input id="__tabbed_4_4" name="__tabbed_4" type="radio" /><input id="__tabbed_4_5" name="__tabbed_4" type="radio" /><input id="__tabbed_4_6" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">R1</label><label for="__tabbed_4_2">R2</label><label for="__tabbed_4_3">R3</label><label for="__tabbed_4_4">R4</label><label for="__tabbed_4_5">PC1</label><label for="__tabbed_4_6">PC2</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>/system/identity/set name=R1
+
+/ip/address/add address=10.1.0.1/24 interface=ether1 disabled=no
+/ip/address/add address=10.12.0.1/24 interface=ether2 disabled=no
+
+/ip/route/add dst-address=0.0.0.0/0 gateway=10.12.0.2 disabled=no
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>/system/identity/set name=R2
+
+/ip/address/add address=10.12.0.2/24 interface=ether1 disabled=no
+/ip/address/add address=10.23.0.2/24 interface=ether2 disabled=no
+
+/ip/route/add dst-address=10.1.0.0/24 gateway=10.12.0.1 disabled=no
+/ip/route/add dst-address=0.0.0.0/0 gateway=10.23.0.3 disabled=no
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>/system/identity/set name=R3
+
+/ip/address/add address=10.34.0.3/24 interface=ether1 disabled=no
+/ip/address/add address=10.23.0.3/24 interface=ether2 disabled=no
+
+/ip/route/add dst-address=10.4.0.0/24 gateway=10.34.0.4 disabled=no
+/ip/route/add dst-address=0.0.0.0/0 gateway=10.23.0.2 disabled=no
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>/system/identity/set name=R4
+
+/ip/address/add address=10.4.0.4/24 interface=ether1 disabled=no
+/ip/address/add address=10.34.0.4/24 interface=ether2 disabled=no
+
+/ip/route/add dst-address=0.0.0.0/0 gateway=10.34.0.3 disabled=no
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ip 10.1.0.10/24 10.1.0.1
+save
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ip 10.4.0.20/24 10.4.0.4
+save
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Результат трассировки маршрута от PC1 до PC2</p>
+<div class="highlight"><pre><span></span><code>PC1&gt; trace 10.4.0.20 -P 1
+trace to 10.4.0.20, 8 hops max (ICMP), press Ctrl+C to stop
+ 1   10.1.0.1   3.434 ms  1.462 ms  1.455 ms
+ 2   10.12.0.2   6.091 ms  4.187 ms  2.215 ms
+ 3   10.23.0.3   2.152 ms  1.944 ms  1.766 ms
+ 4   10.34.0.4   3.667 ms  3.056 ms  2.647 ms
+ 5   10.4.0.20   3.505 ms  3.015 ms  3.353 ms
+</code></pre></div>
+<p>Результат трассировки маршрута от R1 до R4</p>
+<div class="highlight"><pre><span></span><code>[admin@R1] &gt; /tool/traceroute 10.34.0.4
+Columns: ADDRESS, LOSS, SENT, LAST, AVG, BEST, WORST, STD-DEV
+#  ADDRESS    LOSS  SENT  LAST   AVG  BEST  WORST  STD-DEV
+1  10.12.0.2  0%       3  1.9ms  3.4  1.9   5.2    1.4    
+2  10.23.0.3  0%       3  3.4ms  4.8  2.5   8.4    2.6    
+3  10.34.0.4  0%       3  4.9ms  6.3  3.6   10.4   2.9
+</code></pre></div>
+<p>Если на R3 временно отключить маршрут в сторону PC2</p>
+<div class="highlight"><pre><span></span><code>[admin@R3] &gt; ip route/print 
+Flags: D - DYNAMIC; A - ACTIVE; c, s, y - COPY
+Columns: DST-ADDRESS, GATEWAY, DISTANCE
+#     DST-ADDRESS   GATEWAY    DISTANCE
+0  As 0.0.0.0/0     10.23.0.2         1
+<mark class="critic">1  As 10.4.0.0/24   10.34.0.4         1</mark>
+  DAc 10.23.0.0/24  ether2            0
+  DAc 10.34.0.0/24  ether1            0
+[admin@R3] &gt; ip route/disable numbers=1
+</code></pre></div>
+<p>то произойдет зацикливание маршрута, т.е. пакеты начинают блуждать от R2 до R3 до тех пор, пока не закончится TTL</p>
+<div class="highlight"><pre><span></span><code>PC1&gt; trace 10.4.0.20 -P 1
+trace to 10.4.0.20, 8 hops max (ICMP), press Ctrl+C to stop
+ 1   10.1.0.1   1.273 ms  0.881 ms  0.452 ms
+ 2   10.12.0.2   2.127 ms  1.531 ms  1.419 ms
+ 3   10.23.0.3   4.211 ms  2.218 ms  1.810 ms
+ 4   10.12.0.2   2.045 ms  2.220 ms  2.809 ms
+ 5   10.23.0.3   3.957 ms  2.665 ms  2.472 ms
+ 6   10.12.0.2   3.890 ms  2.884 ms  2.945 ms
+ 7   10.23.0.3   3.725 ms  3.841 ms  3.192 ms
+ 8   10.12.0.2   3.767 ms  3.561 ms  3.518 ms
+</code></pre></div>
+<blockquote>
+<p><strong>❓ Из-за чего происходит зацикливание маршрута в данном случае?</strong></p>
+</blockquote>
+<p>По умолчанию утилита <code>trace</code> в VPCS использует максимальное значение <code>TTL = 8</code>, поэтому вывод ограничен 8-ю строками. Если изменить максимальное значение, то результат будет другим</p>
+<div class="highlight"><pre><span></span><code>PC1&gt; trace ?
+
+trace HOST [OPTION ...]
+  Print the path packets take to the network HOST. HOST can be an ip address or
+  name.
+    Options:
+      -P protocol    Use IP protocol in trace packets
+                       1 - icmp, 17 - udp (default), 6 - tcp
+      <mark class="critic">-m ttl         Maximum ttl, default 8</mark>
+
+PC1&gt; trace 10.4.0.20 -P 1 <mark class="critic">-m 4</mark>
+trace to 10.4.0.20, 4 hops max (ICMP), press Ctrl+C to stop
+ 1   10.1.0.1   0.885 ms  0.439 ms  0.506 ms
+ 2   10.12.0.2   2.617 ms  1.898 ms  1.112 ms
+ 3   10.23.0.3   3.426 ms  1.959 ms  2.563 ms
+ 4   10.12.0.2   2.953 ms  2.011 ms  1.743 ms
+</code></pre></div>
+<p>Если активировать маршрут обратно</p>
+<div class="highlight"><pre><span></span><code>[admin@R3] &gt; ip route/pr
+Flags: D - DYNAMIC; X, I, A - ACTIVE; c, s, y - COPY
+Columns: DST-ADDRESS, GATEWAY, DISTANCE
+#     DST-ADDRESS   GATEWAY    DISTANCE
+<mark class="critic">0  Xs 10.4.0.0/24   10.34.0.4          </mark>
+1  As 0.0.0.0/0     10.23.0.2         1
+  DAc 10.23.0.0/24  ether2            0
+  DAc 10.34.0.0/24  ether1            0
+[admin@R3] &gt; ip route/enable numbers=0
+[admin@R3] &gt; ip route/pr
+Flags: D - DYNAMIC; A - ACTIVE; c, s, y - COPY
+Columns: DST-ADDRESS, GATEWAY, DISTANCE
+#     DST-ADDRESS   GATEWAY    DISTANCE
+0  As 0.0.0.0/0     10.23.0.2         1
+<mark class="critic">1  As 10.4.0.0/24   10.34.0.4         1</mark>
+  DAc 10.23.0.0/24  ether2            0
+  DAc 10.34.0.0/24  ether1            0
+</code></pre></div>
+<p>и задать при трассировке максимальное значение <code>TTL = 2</code>, то маршрут не будет построен до конца.</p>
+<div class="highlight"><pre><span></span><code>PC1&gt; trace 10.4.0.20 -P 1 -m 2
+trace to 10.4.0.20, 2 hops max (ICMP), press Ctrl+C to stop
+ 1   10.1.0.1   1.668 ms  1.961 ms  1.666 ms
+ 2   10.12.0.2   2.314 ms  1.583 ms  1.453 ms 
+</code></pre></div>
+<h3 id="4-mikrotik-cisco-ipv6">Пример 4 (MikroTik + Cisco + IPv6)</h3>
+<p><strong>⚠️ Актуально для версии Router OS 7.8 stable.<br>По умолчанию логин - <code>admin</code>, пароль - <code>{ пустой }</code>.</strong></p>
+<p><strong>Схема</strong></p>
+<p><img alt="img" src="assets/example_mikrotik%2Bcisco%2Bipv6.png" /></p>
+<p><strong>Настройка</strong></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:6"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><input id="__tabbed_5_4" name="__tabbed_5" type="radio" /><input id="__tabbed_5_5" name="__tabbed_5" type="radio" /><input id="__tabbed_5_6" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">R1 (MikroTik)</label><label for="__tabbed_5_2">R2 (MikroTik)</label><label for="__tabbed_5_3">R3 (Cisco)</label><label for="__tabbed_5_4">R4 (Cisco)</label><label for="__tabbed_5_5">PC1</label><label for="__tabbed_5_6">PC2</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>/system/identity/set name=R1
+
+/ipv6 address add address=10:1::1/64 interface=ether1 disabled=no
+/ipv6 address add address=10:12::1/64 interface=ether2 disabled=no
+
+/ipv6 route add dst-address=::/0 gateway=10:12::2 disabled=no
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>/system/identity/set name=R2
+
+/ipv6 address add address=10:12::2/64 interface=ether1 disabled=no
+/ipv6 address add address=10:23::2/64 interface=ether2 disabled=no
+
+/ipv6 route add dst-address=10:1::/64 gateway=10:12::1 disabled=no
+/ipv6 route add dst-address=::/0 gateway=10:23::3 disabled=no
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+hostname R3
+ipv6 unicast-routing
+
+int e0/1
+ipv6 add 10:23::3/64
+no sh
+
+int e0/0
+ipv6 add 10:34::3/64
+no sh
+exit
+
+ipv6 route ::/0 10:23::2
+ipv6 route 10:4::/64 10:34::4
+
+wr mem
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>conf t
+hostname R4
+ipv6 unicast-routing
+
+int e0/0
+ipv6 add 10:4::4/64
+no sh
+
+int e0/1
+ipv6 add 10:34::4/64
+no sh
+exit
+
+ipv6 route ::/0 10:34::3
+
+wr mem
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ip 10:1::10/64
+save
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code>ip 10:4::20/64
+save
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Проверить доступность адреса и построить маршрут можно с помощью утилит <code>ping</code> и <code>trace</code>, соответственно, указав IPv6-адреса вместо IPv4.</p>
+<h2 id="_2">🧰 Лабораторная работа</h2>
+<details class="info">
+<summary>Ознакомиться перед выполнением</summary>
+<ul>
+<li>Вместо ❔ или <code>x</code> нужно подставить свой номер по журналу</li>
+<li>Выполнять задание без "отмашки" <strong>не стоит</strong> ⛔, т.к. задание здесь может отличаться от актуальной версии</li>
+<li>У каждой работы есть <strong>срок сдачи</strong> 📅, который озвучивается на занятии, после которого работа не может быть защищена на максимальный балл 📉</li>
+<li><strong>Дополнительные задания</strong> 📚  не являются обязательными, но по результатам сдачи лабораторной работы может быть выдано одно или несколько из них. Также дополнительное задание может быть сформулировано <strong>устно</strong></li>
+<li>Для каждой лабораторной работы должен быть <strong>отчет</strong> 📝 с описанием выполнения ваших действий, оформление должно соответствовать требованиям (см. на сайте учебного заведения)</li>
+<li>Нужно уметь ответить на <strong>вопросы</strong> ❓ по теме, контрольные вопросы и другие связанные вопросы</li>
+<li>Примеры могут быть выполнены <strong>по желанию</strong>, а также выданы в качестве дополнительного задания с изменениями или без <strong>в случае неуспешной 😢 защиты основной работы</strong></li>
+<li>Иногда в работах встречаются задания по <strong>IPv4 и IPv6</strong> одновременно 🔗. Это считается как <strong>одна работа</strong>. Допускается сдача работы только с IPv4 или только с IPv6, но <strong>максимальный балл</strong> в таком случае <strong>получить невозможно</strong></li>
+</ul>
+</details>
+<h3 id="_3">Схема</h3>
+<p><img alt="Схема сети" src="assets/icmp_task.png" /></p>
+<p><strong>⚠️ IPv4 и IPv6 выполнять на одной схеме.</strong></p>
+<p><strong>⚠️ В качестве PC рекомендуется использовать Linux.</strong></p>
+<h3 id="_4">Условия</h3>
+<p><strong>⚠️ Под <code>trace</code> понимается любая команда, выполняющая трассировку маршрута.</strong></p>
+<p><strong>IPv4</strong></p>
+<ol>
+<li>Исходная сеть IPv4 - <code>10.x.0.0/16</code>. Разделить на необходимое количество (определить самостоятельно) подсетей и использовать их в схеме.</li>
+<li>Маршрутизация - статическая.</li>
+<li>Где разумно использовать маршрут по умолчанию.</li>
+<li>Где разумно использовать суммарный маршрут.</li>
+<li>С помощью команды <code>trace</code> (может называться по разному в разных ОС) изучить  результаты трассировки маршрута.</li>
+<li>С помощью Wireshark изучить принцип работы трассировки маршрута.</li>
+</ol>
+<p><strong>IPv6</strong></p>
+<ol>
+<li>Исходная сеть IPv6 - <code>2000:x::/48</code>. Разделить на подсети с помощью идентификатора подсети и использовать их в схеме.</li>
+<li>Остальные условия аналогичны условиям IPv4.</li>
+</ol>
+<h3 id="_5">📚 Дополнительные задания</h3>
+<ol>
+<li>Повторить указанный пример. Использовать указанные маршрутизаторы (MikroTik, Linux, Cisco, ...). Адрес исходной сети - <code>10.x.0.0/20</code>. При необходимости разделить сеть на подсети.</li>
+<li>Повторить указанный пример. Использовать указанные маршрутизаторы (MikroTik, Linux, Cisco, ...). Адрес исходной сети - <code>2000:x::/48</code>. При необходимости разделить сеть на подсети.</li>
+</ol>
+<h3 id="_6">🤔 Контрольные вопросы</h3>
+<p><strong>Общие</strong></p>
+<ol>
+<li>Какой принцип работы утилиты <code>trace</code>?</li>
+<li>Какие параметры принимает команда <code>trace</code>?</li>
+<li>В чем принципиальное отличие команды <code>ping</code> от <code>trace</code>?</li>
+<li>По какой причине при выполнении эхо-запроса может появится сообщение типа <code>timeout</code>?</li>
+<li>По какой причине при выполнении эхо-запроса может появится сообщение <code>network unreachable</code>?</li>
+<li>Можно ли, глядя на схему, точно предположить адреса (или сети), которые будут в выводе результата работы утилиты <code>trace</code>?</li>
+<li>Чем отличается трафик в Wireshark, создаваемый утилитой <code>trace</code> и утилитой <code>ping</code> с TTL = 1 (устройство должно находится дальше 1 "хопа")?</li>
+<li>Как, имея несколько таблиц с результатами утилиты <code>trace</code>, построить карту сети?</li>
+<li>Что такое рекурсивный поиск маршрута? Выполняется ли в данной работе такой поиск?</li>
+<li>Что такое маршрут по умолчанию?</li>
+<li>Для чего используется суммарный маршрут?</li>
+<li>Почему появляются <code>* * *</code> в выводе <code>trace</code>?<ol>
+<li>Привести пример схемы, когда будут появляться <code>* * *</code> в выводе <code>trace</code>, но при этом все устройства будут "пинговаться".</li>
+</ol>
+</li>
+<li>Какое минимальное значение TTL необходимо в <code>trace</code>, чтобы корректно построить маршрут?<ol>
+<li>Что будет, если TTL будте меньше требуемого минимума?</li>
+</ol>
+</li>
+<li>Что такое цикличный маршрут?<ol>
+<li>Чем он хорош или плох?</li>
+<li>Продемонстрировать цикличный маршрут.</li>
+</ol>
+</li>
+</ol>
+<p><strong>IPv6</strong></p>
+<ol>
+<li>Можно ли не указывать шлюз по умолчанию на ПК в случае IPv6? Почему?</li>
+<li>Что является аналогом ARP-запроса и ARP-ответа в IPv6?</li>
+<li>Для чего нужны пакеты "RA", "RS", "ND", "NS"?</li>
+</ol>
+<style>
+    .copyright {
+        color: gray;
+        font-size: 0.6rem;
+    }
+</style>
+
+<div class="copyright">
+
+<hr>
+
+Используя данный сайт и его ресурсы, вы соглашаетесь с <a href=/policy/> политикой и соглашениями сайта</a>.<br>
+
+©️ Оформление, изложение, медиаматериалы. И. Попов, 2020-2025<br>
+
+Сделано с помощью Material for MkDocs.<br>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
